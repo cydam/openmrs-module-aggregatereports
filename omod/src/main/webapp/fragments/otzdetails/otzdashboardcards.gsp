@@ -18,7 +18,7 @@
                    <div class="col-sm-5"><i class="icon-info  fa fa-users"></i></div>
                    <div class="col-sm-7"><h4><strong><span class="large icon-info" id="txCurrAyP">-</span><br/></strong> </h4></div>
                </div>
-               <span class="label label-info" id="optimal_less_20_percent">TX_CURR for AYPLHIVs in facility</span>
+               <span class="label label-info" id="optimal_less_20_percent">AYPLHIVs Currently on Treatment</span>
             </a>
             
         </div>
@@ -55,7 +55,7 @@
                    <div class="col-sm-5"><i class=" icon-info fa icon-bar-chart"></i></div>
                    <div class="col-sm-7"><h4><strong><span class="large icon-info" id="aypEnrolled">-</span><br/></strong> </h4></div>
                </div>
-               <span class="label label-success" id="optimal_20_30_percent">Proportion of AYPLHIVs enrolled in OTZ</span>
+               <span class="label label-success" id="optimal_20_30_percent">% of AYPLHIVs Currently on Treatment</span>
 
             </a>
         </div>
@@ -111,6 +111,7 @@
 var jq = jQuery; 
 var totalEnrolled = 0;
 var totalTxCurr = 0;
+var AYPLHIVsTxCurr = 0;
 var totalMale = 0;
 var totalFemale = 0;
 var total1014 = 0;
@@ -220,8 +221,9 @@ var idLists = [];
 
     enrolListDub = data;  
         
-                console.log("sssssssssssssssssssssssssssdddddddddddddddddddddddddddddd");
+    console.log("sssssssssssssssssssssssssssdddddddddddddddddddddddddddddd");
         console.log(enrolListDub);
+        
                 return  myAjax({startDate:startDate, endDate:endDate}, "otz/getTxCurr.action");
         
     }).then(function(response){
@@ -269,11 +271,28 @@ var idLists = [];
         console.log(enrolListFull.length);
         //////////////////////////////////////////////////////
         
-        totalTxCurr = data.length;
+        data2 = data;
+        console.log("data222222222222222222222222222222222222222222222222222222222222222222");
+        console.log(data2);
+        console.log("ssssssssssssssssssssssssssssssssxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+        console.log(enrolListDub.patients);
+
+        var filteredData2 = data2.filter(function(obj) {
+            return enrolListDub.patients.some(function(patient) {
+                return patient.pepfarId === obj.pepfarId;
+            });
+        });
+
+        console.log("ffffffffffffffffffffffffdddddddddddddddddddd222222222222222222222222222");
+        console.log(filteredData2);
+
+
+        //totalTxCurr = data2.length;
+        totalTxCurr = filteredData2.length;
         txCurr = data;
         jq("#txCurrAyP").html(totalTxCurr);
         
-        var proportionEnrolled = (totalEnrolled/totalTxCurr) * 100;
+        var proportionEnrolled = (totalTxCurr/totalEnrolled) * 100;
         jq("#aypEnrolled").html(proportionEnrolled.toFixed(1)+"%");
         
         
@@ -743,4 +762,5 @@ var idLists = [];
 
 
  </script>
+    
     
