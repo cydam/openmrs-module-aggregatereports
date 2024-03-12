@@ -451,41 +451,43 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
             const beginDate = new Date(startDate);
             const finishDate = new Date(endDate);
 
-            const newdatelist = [];
-            let currentDate = beginDate;
 
-            newdatelist.push(beginDate.toISOString().split("T")[0]);
+          
+            let datePairs = [];
 
-            while (currentDate < finishDate) {
-            
-              currentDate.setMonth(currentDate.getMonth() + 1);
-            
-              if (currentDate.getMonth() === finishDate.getMonth()) {
-                newdatelist.push(finishDate.toISOString().split("T")[0]);
-                break;
+            let currentDate = new Date(beginDate);
+
+            while (currentDate <= finishDate) {
+              let startDate = currentDate.toISOString().split("T")[0];
+              let endDate = "";
+
+              if (currentDate.getMonth() < 11) {
+                // If it's not the last month of the year, set the end date to the last day of the month
+                endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).toISOString().split("T")[0];
+              } else if (currentDate.getFullYear() === finishDate.getFullYear() && currentDate.getMonth() === finishDate.getMonth()) {
+                // If it's the last month of the year and matches the finish date, set the end date to the finish date
+                endDate = finishDate.toISOString().split("T")[0];
               } else {
-                newdatelist.push(currentDate.toISOString().split("T")[0]);
+                // If it's the last month of the year but not the finish date, set the end date to the finish date
+                endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).toISOString().split("T")[0];
               }
-            }
-            //newdatelist[newdatelist.length - 1] = finishDate.toISOString().split("T")[0];
-            
-            console.log(newdatelist);
-            
-            /////////////////////////////////////////////////
-            function createDatePairs(dates) {
-                let datePairs = [];
-                for (let i = 0; i < dates.length - 1; i++) {
-                  datePairs.push({
-                    id: i + 1,
-                    startDate: dates[i],
-                    endDate: dates[i + 1]
-                  });
-                }
-                return datePairs;
+
+              datePairs.push({
+                id: datePairs.length + 1,
+                startDate: startDate,
+                endDate: endDate
+              });
+
+              currentDate.setMonth(currentDate.getMonth() + 1);
             }
 
-              let datePairs = createDatePairs(newdatelist);
-              console.log(datePairs);
+            // Adjust the end date of the last date pair
+            datePairs[datePairs.length - 1].endDate = finishDate.toISOString().split("T")[0];
+
+            console.log(datePairs);
+
+
+
 
 
             /////////////////////////////////////////////////here we go/////////////////////////////////////////////////
