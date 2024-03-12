@@ -447,6 +447,49 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
             console.log("Start: "+startDate);
             console.log("End: "+endDate);
             
+            /////////////////////////////////////////////////here we go/////////////////////////////////////////////////
+            const beginDate = new Date(startDate);
+            const finishDate = new Date(endDate);
+
+            const newdatelist = [];
+            let currentDate = beginDate;
+
+            newdatelist.push(beginDate.toISOString().split("T")[0]);
+
+            while (currentDate < finishDate) {
+            
+              currentDate.setMonth(currentDate.getMonth() + 1);
+            
+              if (currentDate.getMonth() === finishDate.getMonth()) {
+                newdatelist.push(finishDate.toISOString().split("T")[0]);
+                break;
+              } else {
+                newdatelist.push(currentDate.toISOString().split("T")[0]);
+              }
+            }
+            //newdatelist[newdatelist.length - 1] = finishDate.toISOString().split("T")[0];
+            
+            console.log(newdatelist);
+            
+            /////////////////////////////////////////////////
+            function createDatePairs(dates) {
+                let datePairs = [];
+                for (let i = 0; i < dates.length - 1; i++) {
+                  datePairs.push({
+                    id: i + 1,
+                    startDate: dates[i],
+                    endDate: dates[i + 1]
+                  });
+                }
+                return datePairs;
+            }
+
+              let datePairs = createDatePairs(newdatelist);
+              console.log(datePairs);
+
+
+            /////////////////////////////////////////////////here we go/////////////////////////////////////////////////
+            
             getOTZData();
             
             
