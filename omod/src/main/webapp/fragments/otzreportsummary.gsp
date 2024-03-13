@@ -454,29 +454,48 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
 
 
             
-            let datePairs = [];
+function getStartAndEndDates(startMonth, endMonth) {
+  const months = [];
 
-            let currentDate = new Date(beginDate);
+  let currentMonth = startMonth.getMonth();
+  let currentYear = startMonth.getFullYear();
 
-            while (currentDate <= finishDate) {
-              let startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).toISOString().split("T")[0];
-              let endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).toISOString().split("T")[0];
+  while (currentMonth <= endMonth.getMonth() || currentYear < endMonth.getFullYear()) {
+    const startDate = new Date(currentYear, currentMonth, 1);
+    const endDate = new Date(currentYear, currentMonth + 1, 0);
+    
+    months.push({
+      month: currentMonth + 1,
+      startDate: startDate,
+      endDate: endDate
+    });
 
-              if (currentDate.getMonth() === finishDate.getMonth() && currentDate.getFullYear() === finishDate.getFullYear()) {
-                endDate = finishDate.toISOString().split("T")[0];
-              }
+    // Increment month and year
+    currentMonth++;
+    if (currentMonth > 11) {
+      currentMonth = 0;
+      currentYear++;
+    }
+  }
 
-              datePairs.push({
-                id: datePairs.length + 1,
-                startDate: startDate,
-                endDate: endDate
-              });
+  return months;
+}
 
-              currentDate.setMonth(currentDate.getMonth() + 1);
-            }
 
-            console.log(datePairs);
+const monthsData = getStartAndEndDates(beginDate, finishDate);
+console.log(monthsData);
 
+
+// Iterate over the array using a for loop
+for (let i = 0; i < monthsData.length; i++) {
+  console.log("Month: " + monthsData[i].month);
+  console.log("Start Date: " + monthsData[i].startDate.toDateString());
+  console.log("End Date: " + monthsData[i].endDate.toDateString());
+  console.log("Start Day: " + monthsData[i].startDate.getDate());
+  console.log("End Day: " + monthsData[i].endDate.getDate());
+  console.log("Year: " + monthsData[i].startDate.getFullYear());
+  console.log('----------------------');
+}
 
 
 
