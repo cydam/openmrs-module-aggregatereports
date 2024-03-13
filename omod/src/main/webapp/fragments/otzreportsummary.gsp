@@ -452,42 +452,48 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
             const finishDate = new Date(endDate);
 
 
-          
-            let datePairs = [];
+            function getStartAndEndDates(startMonth, endMonth) {
+              const months = [];
 
-            let currentDate = new Date(beginDate);
+              let currentMonth = startMonth.getMonth();
+              let currentYear = startMonth.getFullYear();
 
-            while (currentDate <= finishDate) {
-              let startDate = currentDate.toISOString().split("T")[0];
-              let endDate = "";
+              while (currentMonth <= endMonth.getMonth() || currentYear < endMonth.getFullYear()) {
+                const startDate = new Date(currentYear, currentMonth, 1);
+                const endDate = new Date(currentYear, currentMonth + 1, 0);
 
-              if (currentDate.getMonth() < 11) {
-                // If it's not the last month of the year, set the end date to the last day of the month
-                endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).toISOString().split("T")[0];
-              } else if (currentDate.getFullYear() === finishDate.getFullYear() && currentDate.getMonth() === finishDate.getMonth()) {
-                // If it's the last month of the year and matches the finish date, set the end date to the finish date
-                endDate = finishDate.toISOString().split("T")[0];
-              } else {
-                // If it's the last month of the year but not the finish date, set the end date to the finish date
-                endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).toISOString().split("T")[0];
+                months.push({
+                  month: currentMonth + 1,
+                  startDate: startDate,
+                  endDate: endDate
+                });
+
+                // Increment month and year
+                currentMonth++;
+                if (currentMonth > 11) {
+                  currentMonth = 0;
+                  currentYear++;
+                }
               }
 
-              datePairs.push({
-                id: datePairs.length + 1,
-                startDate: startDate,
-                endDate: endDate
-              });
-
-              currentDate.setMonth(currentDate.getMonth() + 1);
+              return months;
             }
 
-            // Adjust the end date of the last date pair
-            datePairs[datePairs.length - 1].endDate = finishDate.toISOString().split("T")[0];
+            
 
-            console.log(datePairs);
+            const monthsData = getStartAndEndDates(beginDate, finishDate);
+            console.log(monthsData);
 
-
-
+            // Iterate over each month data
+            monthsData.forEach(month => {
+              console.log(`Month: ${month.month}`);
+              console.log(`Start Date: ${month.startDate.toDateString()}`);
+              console.log(`End Date: ${month.endDate.toDateString()}`);
+              console.log(`Start Day: ${month.startDate.getDate()}`);
+              console.log(`End Day: ${month.endDate.getDate()}`);
+              console.log(`Year: ${month.startDate.getFullYear()}`);
+              console.log('----------------------');
+            });
 
 
             /////////////////////////////////////////////////here we go/////////////////////////////////////////////////
