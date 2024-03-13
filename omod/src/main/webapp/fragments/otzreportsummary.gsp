@@ -452,48 +452,32 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
             const finishDate = new Date(endDate);
 
 
-            function getStartAndEndDates(startMonth, endMonth) {
-              const months = [];
-
-              let currentMonth = startMonth.getMonth();
-              let currentYear = startMonth.getFullYear();
-
-              while (currentMonth <= endMonth.getMonth() || currentYear < endMonth.getFullYear()) {
-                const startDate = new Date(currentYear, currentMonth, 1);
-                const endDate = new Date(currentYear, currentMonth + 1, 0);
-
-                months.push({
-                  month: currentMonth + 1,
-                  startDate: startDate,
-                  endDate: endDate
-                });
-
-                // Increment month and year
-                currentMonth++;
-                if (currentMonth > 11) {
-                  currentMonth = 0;
-                  currentYear++;
-                }
-              }
-
-              return months;
-            }
 
             
+            let datePairs = [];
 
-            const monthsData = getStartAndEndDates(beginDate, finishDate);
-            console.log(monthsData);
+            let currentDate = new Date(beginDate);
 
-            // Iterate over each month data
-            monthsData.forEach(month => {
-              console.log(`Month: ${month.month}`);
-              console.log(`Start Date: ${month.startDate.toDateString()}`);
-              console.log(`End Date: ${month.endDate.toDateString()}`);
-              console.log(`Start Day: ${month.startDate.getDate()}`);
-              console.log(`End Day: ${month.endDate.getDate()}`);
-              console.log(`Year: ${month.startDate.getFullYear()}`);
-              console.log('----------------------');
-            });
+            while (currentDate <= finishDate) {
+              let startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).toISOString().split("T")[0];
+              let endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).toISOString().split("T")[0];
+
+              if (currentDate.getMonth() === finishDate.getMonth() && currentDate.getFullYear() === finishDate.getFullYear()) {
+                endDate = finishDate.toISOString().split("T")[0];
+              }
+
+              datePairs.push({
+                id: datePairs.length + 1,
+                startDate: startDate,
+                endDate: endDate
+              });
+
+              currentDate.setMonth(currentDate.getMonth() + 1);
+            }
+
+            console.log(datePairs);
+
+
 
 
             /////////////////////////////////////////////////here we go/////////////////////////////////////////////////
