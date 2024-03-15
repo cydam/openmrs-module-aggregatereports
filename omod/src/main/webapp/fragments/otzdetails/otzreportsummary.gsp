@@ -4,6 +4,7 @@ int i=1;
 
 
 def title = config.title
+def formattedMonthLength = config.formattedMonthLength
 
 %>
 <div class="container">
@@ -17,7 +18,7 @@ def title = config.title
         <thead>
             
              <tr>
-                <th  style="text-align:center" align="middle">Implementing Partner</th>
+                <th  style="text-align:center" align="middle">Implementing Partner ${formattedMonthLength}</th>
                 <th  style="text-align:center" align="middle">State</th>
                 <th  style="text-align:center" align="middle">LGA</th>
                 <th  style="text-align:center" align="middle">Facility name</th>

@@ -217,7 +217,7 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
         </div>
       </nav>
       <div class="tab-content" id="nav-tabContent" style="display: none">
-         <div class="tab-pane fade show active" id="nav-summary" role="tabpanel" aria-labelledby="nav-summary-tab">${ ui.includeFragment("dataquality", "otzdetails/otzreportsummary", [title:title]) }</div>
+         <div class="tab-pane fade show active" id="nav-summary" role="tabpanel" aria-labelledby="nav-summary-tab">${ ui.includeFragment("dataquality", "otzdetails/otzreportsummary", [title:title, formattedMonthLength:formattedMonthLength]) }</div>
         <div class="tab-pane fade" id="nav-optimal" role="tabpanel" aria-labelledby="nav-optimal-tab">${ ui.includeFragment("dataquality", "otzdetails/otzdashboard", [title:title]) }</div>
 
       </div>
@@ -543,7 +543,8 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
             const callgetFormattedMonthsData = getFormattedMonthsData(monthsData);
             console.log("here is where i call formatted month");
             console.log(callgetFormattedMonthsData);
-            console.log(callgetFormattedMonthsData.length);
+            var formattedMonthLength = callgetFormattedMonthsData.length;
+            console.log(formattedMonthLength);
             
 
             /////////////////////////////////////////////////here we go/////////////////////////////////////////////////

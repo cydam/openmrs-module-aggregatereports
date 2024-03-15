@@ -52,6 +52,7 @@ public class OtzreportsummaryFragmentController {
 			model.addAttribute("otz_info", obj);*/
 			model.addAttribute("testing", "test");
 			model.addAttribute("title", "OTZ");
+			model.addAttribute("formattedMonthLength", 0);
 			Database.initConnection();
 		}
 		catch (Exception e) {
