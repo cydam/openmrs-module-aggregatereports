@@ -453,51 +453,98 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
 
 
 
+                        
+            function getStartAndEndDates(startMonth, endMonth) {
+            const months = [];
+
+            let currentMonth = startMonth.getMonth();
+            let currentYear = startMonth.getFullYear();
+
+            while (currentMonth <= endMonth.getMonth() || currentYear < endMonth.getFullYear()) {
+                const startDate = new Date(currentYear, currentMonth, 1);
+                const endDate = new Date(currentYear, currentMonth + 1, 0);
+                
+                months.push({
+                month: currentMonth + 1,
+                startDate: startDate,
+                endDate: endDate
+                });
+
+                // Increment month and year
+                currentMonth++;
+                if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+                }
+            }
+
+            return months;
+            }
+
+
+            const monthsData = getStartAndEndDates(beginDate, finishDate);
+            console.log(monthsData);
+
+
+            // Iterate over the array using a for loop
+            // for (let i = 0; i < monthsData.length; i++) {
+            // console.log("Month: " + monthsData[i].month);
+                // let year = monthsData[i].startDate.getFullYear();
+                // let month = monthsData[i].month;
+                // let day = monthsData[i].startDate.getDate();
+                // let formattedDate = year + "-" + ("0" + month).slice(-2) + "-" + ("0" + day).slice(-2);
+                // console.log("Start Date: " + formattedDate);
+// 
+                // let eday = monthsData[i].endDate.getDate();
+                // let eformattedDate = year + "-" + ("0" + month).slice(-2) + "-" + ("0" + eday).slice(-2);
+                // console.log("End Date: " + eformattedDate);
+//             
+            // console.log("Start Day: " + monthsData[i].startDate.getDate());
+            // console.log("End Day: " + monthsData[i].endDate.getDate());
+            // console.log("Year: " + monthsData[i].startDate.getFullYear());
+            // console.log('----------------------');
+            // }
+
+
+
+
+
+            function getFormattedMonthsData(monthsData) {
+            const formattedMonths = [];
+
             
-function getStartAndEndDates(startMonth, endMonth) {
-  const months = [];
+                // Iterate over the array using a for loop
+                for (let i = 0; i < monthsData.length; i++) {
+                    
+                    let year = monthsData[i].startDate.getFullYear();
+                    let month = monthsData[i].month;
+                    let day = monthsData[i].startDate.getDate();
+                    let formattedDate = year + "-" + ("0" + month).slice(-2) + "-" + ("0" + day).slice(-2);
+                    
 
-  let currentMonth = startMonth.getMonth();
-  let currentYear = startMonth.getFullYear();
+                    let eday = monthsData[i].endDate.getDate();
+                    let eformattedDate = year + "-" + ("0" + month).slice(-2) + "-" + ("0" + eday).slice(-2);
+                
+                    formattedMonths.push({
+                        month: i+1,
+                        startDate: formattedDate,
+                        endDate: eformattedDate
+                    });
+            
+                }
 
-  while (currentMonth <= endMonth.getMonth() || currentYear < endMonth.getFullYear()) {
-    const startDate = new Date(currentYear, currentMonth, 1);
-    const endDate = new Date(currentYear, currentMonth + 1, 0);
-    
-    months.push({
-      month: currentMonth + 1,
-      startDate: startDate,
-      endDate: endDate
-    });
+            
 
-    // Increment month and year
-    currentMonth++;
-    if (currentMonth > 11) {
-      currentMonth = 0;
-      currentYear++;
-    }
-  }
+            
 
-  return months;
-}
+            return formattedMonths;
+            }
 
-
-const monthsData = getStartAndEndDates(beginDate, finishDate);
-console.log(monthsData);
-
-
-// Iterate over the array using a for loop
-for (let i = 0; i < monthsData.length; i++) {
-  console.log("Month: " + monthsData[i].month);
-  console.log("Start Date: " + monthsData[i].startDate.toDateString());
-  console.log("End Date: " + monthsData[i].endDate.toDateString());
-  console.log("Start Day: " + monthsData[i].startDate.getDate());
-  console.log("End Day: " + monthsData[i].endDate.getDate());
-  console.log("Year: " + monthsData[i].startDate.getFullYear());
-  console.log('----------------------');
-}
-
-
+            const callgetFormattedMonthsData = getFormattedMonthsData(monthsData);
+            console.log("here is where i call formatted month");
+            console.log(callgetFormattedMonthsData);
+            console.log(callgetFormattedMonthsData.length);
+            
 
             /////////////////////////////////////////////////here we go/////////////////////////////////////////////////
             
