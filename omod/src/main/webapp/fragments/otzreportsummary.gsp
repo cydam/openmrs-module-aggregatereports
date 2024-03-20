@@ -37,6 +37,7 @@ ui.includeCss("dataquality", "myStyle.css")
 def id = config.id
 def months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] as String[];
 
+def formattedMonthLength = 3
 int i=1;
 int year = Calendar.getInstance().get(Calendar.YEAR);
 %>
@@ -543,13 +544,22 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
             const callgetFormattedMonthsData = getFormattedMonthsData(monthsData);
             console.log("here is where i call formatted month");
             console.log(callgetFormattedMonthsData);
-            var formattedMonthLength = callgetFormattedMonthsData.length;
+            formattedMonthLength = callgetFormattedMonthsData.length;
             console.log(formattedMonthLength);
             
 
             /////////////////////////////////////////////////here we go/////////////////////////////////////////////////
-            
-            getOTZData();
+            console.log("for loop log")
+            callgetFormattedMonthsData.forEach(function(item) {
+                console.log(item.month);
+                startDate = item.startDate;
+                endDate = item.endDate;
+                console.log(startDate);
+                console.log(endDate);
+                getOTZData(item.month);
+            });
+
+            //getOTZData();
             
             
         });
@@ -647,9 +657,11 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
        createDatatable();
        
        
-   function getOTZData()
+   function getOTZData(month)
    {
-   
+        let currMonth = month;
+        console.log("currMonth")
+        console.log(currMonth)
              currReportCount = 0;
             //show the progress area
             jq("#progressArea").removeClass("hidden");
@@ -671,19 +683,19 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#totalEnrolledM10To14").html(male1014)
-                jq("#totalEnrolledM15To19").html(male1519)
-                jq("#totalEnrolledM20To24").html(male2024)
-                jq("#totalEnrolledMabove24").html(maleabove24)
+                jq("#totalEnrolledM10To14_"+currMonth).html(male1014)
+                jq("#totalEnrolledM15To19_"+currMonth).html(male1519)
+                jq("#totalEnrolledM20To24_"+currMonth).html(male2024)
+                jq("#totalEnrolledMabove24_"+currMonth).html(maleabove24)
                 
-                 jq("#totalEnrolledF10To14").html(female1014)
-                jq("#totalEnrolledF15To19").html(female1519);
-                jq("#totalEnrolledF20To24").html(female2024)
-                jq("#totalEnrolledFabove24").html(femaleabove24)
+                 jq("#totalEnrolledF10To14_"+currMonth).html(female1014)
+                jq("#totalEnrolledF15To19_"+currMonth).html(female1519);
+                jq("#totalEnrolledF20To24_"+currMonth).html(female2024)
+                jq("#totalEnrolledFabove24_"+currMonth).html(femaleabove24)
                 
                
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#totalEnrolledTotal").html(total)
+                jq("#totalEnrolledTotal_"+currMonth).html(total)
                 
                 
                 //lets set some cards
@@ -705,19 +717,19 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                
                 
-                jq("#totalFullDiscM10To14").html(male1014)
-                jq("#totalFullDiscM15To19").html(male1519)
-                jq("#totalFullDiscM20To24").html(male2024)
-                jq("#totalFullDiscMabove24").html(maleabove24)
+                jq("#totalFullDiscM10To14_"+currMonth).html(male1014)
+                jq("#totalFullDiscM15To19_"+currMonth).html(male1519)
+                jq("#totalFullDiscM20To24_"+currMonth).html(male2024)
+                jq("#totalFullDiscMabove24_"+currMonth).html(maleabove24)
                 
-                 jq("#totalFullDiscF10To14").html(female1014)
-                jq("#totalFullDiscF15To19").html(female1519);
-                jq("#totalFullDiscF20To24").html(female2024)
-                jq("#totalFullDiscFabove24").html(femaleabove24)
+                 jq("#totalFullDiscF10To14_"+currMonth).html(female1014)
+                jq("#totalFullDiscF15To19_"+currMonth).html(female1519);
+                jq("#totalFullDiscF20To24_"+currMonth).html(female2024)
+                jq("#totalFullDiscFabove24_"+currMonth).html(femaleabove24)
                 
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#totalFullDiscTotal").html(total)
+                jq("#totalFullDiscTotal_"+currMonth).html(total)
                 console.log("total disclosed", total);
                 
                 renderFullDisclosure(totalEnrolled, total);
@@ -737,20 +749,20 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#totalEnrolledWithApp6MtPriorM10To14").html(male1014)
-                jq("#totalEnrolledWithApp6MtPriorM15To19").html(male1519)
-                jq("#totalEnrolledWithApp6MtPriorM20To24").html(male2024)
-                jq("#totalEnrolledWithApp6MtPriorMabove24").html(maleabove24)
+                jq("#totalEnrolledWithApp6MtPriorM10To14_"+currMonth).html(male1014)
+                jq("#totalEnrolledWithApp6MtPriorM15To19_"+currMonth).html(male1519)
+                jq("#totalEnrolledWithApp6MtPriorM20To24_"+currMonth).html(male2024)
+                jq("#totalEnrolledWithApp6MtPriorMabove24_"+currMonth).html(maleabove24)
                 
-                 jq("#totalEnrolledWithApp6MtPriorF10To14").html(female1014)
-                jq("#totalEnrolledWithApp6MtPriorF15To19").html(female1519);
-                jq("#totalEnrolledWithApp6MtPriorF20To24").html(female2024)
-                jq("#totalEnrolledWithApp6MtPriorFabove24").html(femaleabove24)
+                 jq("#totalEnrolledWithApp6MtPriorF10To14_"+currMonth).html(female1014)
+                jq("#totalEnrolledWithApp6MtPriorF15To19_"+currMonth).html(female1519);
+                jq("#totalEnrolledWithApp6MtPriorF20To24_"+currMonth).html(female2024)
+                jq("#totalEnrolledWithApp6MtPriorFabove24_"+currMonth).html(femaleabove24)
                 
                 
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#totalEnrolledWithApp6MtPriorTotal").html(total)
+                jq("#totalEnrolledWithApp6MtPriorTotal_"+currMonth).html(total)
                 return  myAjax({startDate:startDate, endDate:endDate, ageType:ageTyp}, '${ ui.actionLink("getTotalEnrolledWhoKeptScheduledPickup6MonthsBefore") }');
             })
             .then(function(response){
@@ -763,18 +775,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#totalEnrolledKeptAppPriorM10To14").html(male1014)
-                jq("#totalEnrolledKeptAppPriorM15To19").html(male1519)
-                jq("#totalEnrolledKeptAppPriorM20To24").html(male2024)
-                jq("#totalEnrolledKeptAppPriorMabove24").html(maleabove24)
+                jq("#totalEnrolledKeptAppPriorM10To14_"+currMonth).html(male1014)
+                jq("#totalEnrolledKeptAppPriorM15To19_"+currMonth).html(male1519)
+                jq("#totalEnrolledKeptAppPriorM20To24_"+currMonth).html(male2024)
+                jq("#totalEnrolledKeptAppPriorMabove24_"+currMonth).html(maleabove24)
                 
-                 jq("#totalEnrolledKeptAppPriorF10To14").html(female1014)
-                jq("#totalEnrolledKeptAppPriorF15To19").html(female1519);
-                jq("#totalEnrolledKeptAppPriorF20To24").html(female2024);
-                jq("#totalEnrolledKeptAppPriorFabove24").html(femaleabove24);
+                 jq("#totalEnrolledKeptAppPriorF10To14_"+currMonth).html(female1014)
+                jq("#totalEnrolledKeptAppPriorF15To19_"+currMonth).html(female1519);
+                jq("#totalEnrolledKeptAppPriorF20To24_"+currMonth).html(female2024);
+                jq("#totalEnrolledKeptAppPriorFabove24_"+currMonth).html(femaleabove24);
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#totalEnrolledKeptAppPriorTotal").html(total)
+                jq("#totalEnrolledKeptAppPriorTotal_"+currMonth).html(total)
                 
                 
                 
@@ -791,19 +803,19 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#totalEnrolledGoodAdhPriorM10To14").html(male1014)
-                jq("#totalEnrolledGoodAdhPriorM15To19").html(male1519)
-                jq("#totalEnrolledGoodAdhPriorM20To24").html(male2024)
-                jq("#totalEnrolledGoodAdhPriorMabove24").html(maleabove24)
+                jq("#totalEnrolledGoodAdhPriorM10To14_"+currMonth).html(male1014)
+                jq("#totalEnrolledGoodAdhPriorM15To19_"+currMonth).html(male1519)
+                jq("#totalEnrolledGoodAdhPriorM20To24_"+currMonth).html(male2024)
+                jq("#totalEnrolledGoodAdhPriorMabove24_"+currMonth).html(maleabove24)
                 
-                 jq("#totalEnrolledGoodAdhPriorF10To14").html(female1014)
-                jq("#totalEnrolledGoodAdhPriorF15To19").html(female1519);
-                jq("#totalEnrolledGoodAdhPriorF20To24").html(female2024)
-                jq("#totalEnrolledGoodAdhPriorFabove24").html(femaleabove24)
+                 jq("#totalEnrolledGoodAdhPriorF10To14_"+currMonth).html(female1014)
+                jq("#totalEnrolledGoodAdhPriorF15To19_"+currMonth).html(female1519);
+                jq("#totalEnrolledGoodAdhPriorF20To24_"+currMonth).html(female2024)
+                jq("#totalEnrolledGoodAdhPriorFabove24_"+currMonth).html(femaleabove24)
                 
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#totalEnrolledGoodAdhPriorTotal").html(total)
+                jq("#totalEnrolledGoodAdhPriorTotal_"+currMonth).html(total)
                 
                 return  myAjax({startDate:startDate, endDate:endDate, ageType:ageTyp}, '${ ui.actionLink("getTotalEnrolledWithVL12MonthsBefore") }');
             })
@@ -818,18 +830,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#totalEnrolledBaselineResultM10To14").html(male1014)
-                jq("#totalEnrolledBaselineResultM15To19").html(male1519)
-                jq("#totalEnrolledBaselineResultM20To24").html(male2024)
-                jq("#totalEnrolledBaselineResultMabove24").html(maleabove24)
+                jq("#totalEnrolledBaselineResultM10To14_"+currMonth).html(male1014)
+                jq("#totalEnrolledBaselineResultM15To19_"+currMonth).html(male1519)
+                jq("#totalEnrolledBaselineResultM20To24_"+currMonth).html(male2024)
+                jq("#totalEnrolledBaselineResultMabove24_"+currMonth).html(maleabove24)
                 
-                jq("#totalEnrolledBaselineResultF10To14").html(female1014)
-                jq("#totalEnrolledBaselineResultF15To19").html(female1519);
-                jq("#totalEnrolledBaselineResultF20To24").html(female2024)
-                jq("#totalEnrolledBaselineResultFabove24").html(femaleabove24)
+                jq("#totalEnrolledBaselineResultF10To14_"+currMonth).html(female1014)
+                jq("#totalEnrolledBaselineResultF15To19_"+currMonth).html(female1519);
+                jq("#totalEnrolledBaselineResultF20To24_"+currMonth).html(female2024)
+                jq("#totalEnrolledBaselineResultFabove24_"+currMonth).html(femaleabove24)
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#totalEnrolledBaselineResultTotal").html(total)
+                jq("#totalEnrolledBaselineResultTotal_"+currMonth).html(total)
                 
                 
                 
@@ -846,18 +858,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#totalEnrolledBaselineResultBelow200M10To14").html(male1014)
-                jq("#totalEnrolledBaselineResultBelow200M15To19").html(male1519)
-                jq("#totalEnrolledBaselineResultBelow200M20To24").html(male2024)
-                jq("#totalEnrolledBaselineResultBelow200Mabove24").html(maleabove24)
+                jq("#totalEnrolledBaselineResultBelow200M10To14_"+currMonth).html(male1014)
+                jq("#totalEnrolledBaselineResultBelow200M15To19_"+currMonth).html(male1519)
+                jq("#totalEnrolledBaselineResultBelow200M20To24_"+currMonth).html(male2024)
+                jq("#totalEnrolledBaselineResultBelow200Mabove24_"+currMonth).html(maleabove24)
                 
-                jq("#totalEnrolledBaselineResultBelow200F10To14").html(female1014)
-                jq("#totalEnrolledBaselineResultBelow200F15To19").html(female1519);
-                jq("#totalEnrolledBaselineResultBelow200F20To24").html(female2024);
-                jq("#totalEnrolledBaselineResultBelow200Fabove24").html(femaleabove24);
+                jq("#totalEnrolledBaselineResultBelow200F10To14_"+currMonth).html(female1014)
+                jq("#totalEnrolledBaselineResultBelow200F15To19_"+currMonth).html(female1519);
+                jq("#totalEnrolledBaselineResultBelow200F20To24_"+currMonth).html(female2024);
+                jq("#totalEnrolledBaselineResultBelow200Fabove24_"+currMonth).html(femaleabove24);
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#totalEnrolledBaselineResultBelow200Total").html(total)
+                jq("#totalEnrolledBaselineResultBelow200Total_"+currMonth).html(total)
                 
                 
                 
@@ -873,18 +885,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#totalEnrolledBaselineResult200To1000M10To14").html(male1014)
-                jq("#totalEnrolledBaselineResult200To1000M15To19").html(male1519)
-                jq("#totalEnrolledBaselineResult200To1000M20To24").html(male2024)
-                jq("#totalEnrolledBaselineResult200To1000Mabove24").html(maleabove24)
+                jq("#totalEnrolledBaselineResult200To1000M10To14_"+currMonth).html(male1014)
+                jq("#totalEnrolledBaselineResult200To1000M15To19_"+currMonth).html(male1519)
+                jq("#totalEnrolledBaselineResult200To1000M20To24_"+currMonth).html(male2024)
+                jq("#totalEnrolledBaselineResult200To1000Mabove24_"+currMonth).html(maleabove24)
                 
-                jq("#totalEnrolledBaselineResult200To1000F10To14").html(female1014)
-                jq("#totalEnrolledBaselineResult200To1000F15To19").html(female1519);
-                jq("#totalEnrolledBaselineResult200To1000F20To24").html(female2024)
-                jq("#totalEnrolledBaselineResult200To1000Fabove24").html(femaleabove24)
+                jq("#totalEnrolledBaselineResult200To1000F10To14_"+currMonth).html(female1014)
+                jq("#totalEnrolledBaselineResult200To1000F15To19_"+currMonth).html(female1519);
+                jq("#totalEnrolledBaselineResult200To1000F20To24_"+currMonth).html(female2024)
+                jq("#totalEnrolledBaselineResult200To1000Fabove24_"+currMonth).html(femaleabove24)
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#totalEnrolledBaselineResult200To1000Total").html(total)
+                jq("#totalEnrolledBaselineResult200To1000Total_"+currMonth).html(total)
                 
                 return  myAjax({startDate:startDate, endDate:endDate, ageType:ageTyp}, '${ ui.actionLink("getTotalEnrolledWithVL12MonthsBeforeAndAboveOrEqual1000") }');
             })
@@ -898,18 +910,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#totalEnrolledBaselineResultAbove1000M10To14").html(male1014)
-                jq("#totalEnrolledBaselineResultAbove1000M15To19").html(male1519)
-                jq("#totalEnrolledBaselineResultAbove1000M20To24").html(male2024)
-                jq("#totalEnrolledBaselineResultAbove1000Mabove24").html(maleabove24)
+                jq("#totalEnrolledBaselineResultAbove1000M10To14_"+currMonth).html(male1014)
+                jq("#totalEnrolledBaselineResultAbove1000M15To19_"+currMonth).html(male1519)
+                jq("#totalEnrolledBaselineResultAbove1000M20To24_"+currMonth).html(male2024)
+                jq("#totalEnrolledBaselineResultAbove1000Mabove24_"+currMonth).html(maleabove24)
                 
-                jq("#totalEnrolledBaselineResultAbove1000F10To14").html(female1014)
-                jq("#totalEnrolledBaselineResultAbove1000F15To19").html(female1519);
-                jq("#totalEnrolledBaselineResultAbove1000F20To24").html(female2024)
-                jq("#totalEnrolledBaselineResultAbove1000Fabove24").html(femaleabove24)
+                jq("#totalEnrolledBaselineResultAbove1000F10To14_"+currMonth).html(female1014)
+                jq("#totalEnrolledBaselineResultAbove1000F15To19_"+currMonth).html(female1519);
+                jq("#totalEnrolledBaselineResultAbove1000F20To24_"+currMonth).html(female2024)
+                jq("#totalEnrolledBaselineResultAbove1000Fabove24_"+currMonth).html(femaleabove24)
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#totalEnrolledBaselineResultAbove1000Total").html(total)
+                jq("#totalEnrolledBaselineResultAbove1000Total_"+currMonth).html(total)
                 
                 
                 
@@ -926,19 +938,19 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#totalEnrolledBaselineResult6MtM10To14").html(male1014)
-                jq("#totalEnrolledBaselineResult6MtM15To19").html(male1519)
-                jq("#totalEnrolledBaselineResult6MtM20To24").html(male2024)
-                jq("#totalEnrolledBaselineResult6MtMabove24").html(maleabove24)
+                jq("#totalEnrolledBaselineResult6MtM10To14_"+currMonth).html(male1014)
+                jq("#totalEnrolledBaselineResult6MtM15To19_"+currMonth).html(male1519)
+                jq("#totalEnrolledBaselineResult6MtM20To24_"+currMonth).html(male2024)
+                jq("#totalEnrolledBaselineResult6MtMabove24_"+currMonth).html(maleabove24)
                 
-                jq("#totalEnrolledBaselineResult6MtF10To14").html(female1014)
-                jq("#totalEnrolledBaselineResult6MtF15To19").html(female1519);
-                jq("#totalEnrolledBaselineResult6MtF20To24").html(female2024)
-                jq("#totalEnrolledBaselineResult6MtFabove24").html(femaleabove24)
+                jq("#totalEnrolledBaselineResult6MtF10To14_"+currMonth).html(female1014)
+                jq("#totalEnrolledBaselineResult6MtF15To19_"+currMonth).html(female1519);
+                jq("#totalEnrolledBaselineResult6MtF20To24_"+currMonth).html(female2024)
+                jq("#totalEnrolledBaselineResult6MtFabove24_"+currMonth).html(femaleabove24)
                 
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#totalEnrolledBaselineResult6MtTotal").html(total)
+                jq("#totalEnrolledBaselineResult6MtTotal_"+currMonth).html(total)
                 
                 
                 return  myAjax({startDate:startDate, endDate:endDate, ageType:ageTyp}, '${ ui.actionLink("getTotalEnrolledWithVL6MonthsBeforeAndBelow200") }');
@@ -954,18 +966,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#totalEnrolledBaselineResult6MtBelow200M10To14").html(male1014)
-                jq("#totalEnrolledBaselineResult6MtBelow200M15To19").html(male1519)
-                jq("#totalEnrolledBaselineResult6MtBelow200M20To24").html(male2024)
-                jq("#totalEnrolledBaselineResult6MtBelow200Mabove24").html(maleabove24)
+                jq("#totalEnrolledBaselineResult6MtBelow200M10To14_"+currMonth).html(male1014)
+                jq("#totalEnrolledBaselineResult6MtBelow200M15To19_"+currMonth).html(male1519)
+                jq("#totalEnrolledBaselineResult6MtBelow200M20To24_"+currMonth).html(male2024)
+                jq("#totalEnrolledBaselineResult6MtBelow200Mabove24_"+currMonth).html(maleabove24)
                 
-                jq("#totalEnrolledBaselineResult6MtBelow200F10To14").html(female1014)
-                jq("#totalEnrolledBaselineResult6MtBelow200F15To19").html(female1519);
-                jq("#totalEnrolledBaselineResult6MtBelow200F20To24").html(female2024)
-                jq("#totalEnrolledBaselineResult6MtBelow200Fabove24").html(femaleabove24)
+                jq("#totalEnrolledBaselineResult6MtBelow200F10To14_"+currMonth).html(female1014)
+                jq("#totalEnrolledBaselineResult6MtBelow200F15To19_"+currMonth).html(female1519);
+                jq("#totalEnrolledBaselineResult6MtBelow200F20To24_"+currMonth).html(female2024)
+                jq("#totalEnrolledBaselineResult6MtBelow200Fabove24_"+currMonth).html(femaleabove24)
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#totalEnrolledBaselineResult6MtBelow200Total").html(total)
+                jq("#totalEnrolledBaselineResult6MtBelow200Total_"+currMonth).html(total)
                 
                 
                 return  myAjax({startDate:startDate, endDate:endDate, ageType:ageTyp}, '${ ui.actionLink("getTotalEnrolledWithVL6MonthsBeforeAndBtw200AND1000") }');
@@ -981,19 +993,19 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#totalEnrolledBaselineResult6MtBt200To1000M10To14").html(male1014)
-                jq("#totalEnrolledBaselineResult6MtBt200To1000M15To19").html(male1519)
-                jq("#totalEnrolledBaselineResult6MtBt200To1000M20To24").html(male2024)
-                jq("#totalEnrolledBaselineResult6MtBt200To1000Mabove24").html(maleabove24)
+                jq("#totalEnrolledBaselineResult6MtBt200To1000M10To14_"+currMonth).html(male1014)
+                jq("#totalEnrolledBaselineResult6MtBt200To1000M15To19_"+currMonth).html(male1519)
+                jq("#totalEnrolledBaselineResult6MtBt200To1000M20To24_"+currMonth).html(male2024)
+                jq("#totalEnrolledBaselineResult6MtBt200To1000Mabove24_"+currMonth).html(maleabove24)
                 
-                jq("#totalEnrolledBaselineResult6MtBt200To1000F10To14").html(female1014)
-                jq("#totalEnrolledBaselineResult6MtBt200To1000F15To19").html(female1519);
-                jq("#totalEnrolledBaselineResult6MtBt200To1000F20To24").html(female2024)
-                jq("#totalEnrolledBaselineResult6MtBt200To1000Fabove24").html(femaleabove24)
+                jq("#totalEnrolledBaselineResult6MtBt200To1000F10To14_"+currMonth).html(female1014)
+                jq("#totalEnrolledBaselineResult6MtBt200To1000F15To19_"+currMonth).html(female1519);
+                jq("#totalEnrolledBaselineResult6MtBt200To1000F20To24_"+currMonth).html(female2024)
+                jq("#totalEnrolledBaselineResult6MtBt200To1000Fabove24_"+currMonth).html(femaleabove24)
                 
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#totalEnrolledBaselineResult6MtBt200To1000Total").html(total)
+                jq("#totalEnrolledBaselineResult6MtBt200To1000Total_"+currMonth).html(total)
                 
                 
                 return  myAjax({startDate:startDate, endDate:endDate, ageType:ageTyp}, '${ ui.actionLink("getTotalEnrolledWithVL6MonthsBeforeAndAboveOrEqual1000") }');
@@ -1009,18 +1021,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#totalEnrolledBaselineResult6MtBelow1000Gt1000M10To14").html(male1014)
-                jq("#totalEnrolledBaselineResult6MtBelow1000Gt1000M15To19").html(male1519)
-                jq("#totalEnrolledBaselineResult6MtBelow1000Gt1000M20To24").html(male2024)
-                jq("#totalEnrolledBaselineResult6MtBelow1000Gt1000Mabove24").html(maleabove24)
+                jq("#totalEnrolledBaselineResult6MtBelow1000Gt1000M10To14_"+currMonth).html(male1014)
+                jq("#totalEnrolledBaselineResult6MtBelow1000Gt1000M15To19_"+currMonth).html(male1519)
+                jq("#totalEnrolledBaselineResult6MtBelow1000Gt1000M20To24_"+currMonth).html(male2024)
+                jq("#totalEnrolledBaselineResult6MtBelow1000Gt1000Mabove24_"+currMonth).html(maleabove24)
                 
-                jq("#totalEnrolledBaselineResult6MtBelow1000Gt1000F10To14").html(female1014)
-                jq("#totalEnrolledBaselineResult6MtBelow1000Gt1000F15To19").html(female1519);
-                jq("#totalEnrolledBaselineResult6MtBelow1000Gt1000F20To24").html(female2024)
-                jq("#totalEnrolledBaselineResult6MtBelow1000Gt1000Fabove24").html(femaleabove24)
+                jq("#totalEnrolledBaselineResult6MtBelow1000Gt1000F10To14_"+currMonth).html(female1014)
+                jq("#totalEnrolledBaselineResult6MtBelow1000Gt1000F15To19_"+currMonth).html(female1519);
+                jq("#totalEnrolledBaselineResult6MtBelow1000Gt1000F20To24_"+currMonth).html(female2024)
+                jq("#totalEnrolledBaselineResult6MtBelow1000Gt1000Fabove24_"+currMonth).html(femaleabove24)
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#totalEnrolledBaselineResult6MtBelow1000Gt1000Total").html(total)
+                jq("#totalEnrolledBaselineResult6MtBelow1000Gt1000Total_"+currMonth).html(total)
                 
                 
                 
@@ -1036,18 +1048,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#totalEnrolledEligibleMtZM10To14").html(male1014)
-                jq("#totalEnrolledEligibleMtZM15To19").html(male1519)
-                jq("#totalEnrolledEligibleMtZM20To24").html(male2024)
-                jq("#totalEnrolledEligibleMtZMabove24").html(maleabove24)
+                jq("#totalEnrolledEligibleMtZM10To14_"+currMonth).html(male1014)
+                jq("#totalEnrolledEligibleMtZM15To19_"+currMonth).html(male1519)
+                jq("#totalEnrolledEligibleMtZM20To24_"+currMonth).html(male2024)
+                jq("#totalEnrolledEligibleMtZMabove24_"+currMonth).html(maleabove24)
                 
-                jq("#totalEnrolledEligibleMtZF10To14").html(female1014)
-                jq("#totalEnrolledEligibleMtZF15To19").html(female1519);
-                jq("#totalEnrolledEligibleMtZF20To24").html(female2024)
-                jq("#totalEnrolledEligibleMtZFabove24").html(femaleabove24)
+                jq("#totalEnrolledEligibleMtZF10To14_"+currMonth).html(female1014)
+                jq("#totalEnrolledEligibleMtZF15To19_"+currMonth).html(female1519);
+                jq("#totalEnrolledEligibleMtZF20To24_"+currMonth).html(female2024)
+                jq("#totalEnrolledEligibleMtZFabove24_"+currMonth).html(femaleabove24)
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#totalEnrolledEligibleMtZTotal").html(total)
+                jq("#totalEnrolledEligibleMtZTotal_"+currMonth).html(total)
                 
                 
                 
@@ -1063,18 +1075,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#totalEnrolledEligibleMtZSampleM10To14").html(male1014)
-                jq("#totalEnrolledEligibleMtZSampleM15To19").html(male1519)
-                jq("#totalEnrolledEligibleMtZSampleM20To24").html(male2024)
-                jq("#totalEnrolledEligibleMtZSampleMabove24").html(maleabove24)
+                jq("#totalEnrolledEligibleMtZSampleM10To14_"+currMonth).html(male1014)
+                jq("#totalEnrolledEligibleMtZSampleM15To19_"+currMonth).html(male1519)
+                jq("#totalEnrolledEligibleMtZSampleM20To24_"+currMonth).html(male2024)
+                jq("#totalEnrolledEligibleMtZSampleMabove24_"+currMonth).html(maleabove24)
                 
-                jq("#totalEnrolledEligibleMtZSampleF10To14").html(female1014)
-                jq("#totalEnrolledEligibleMtZSampleF15To19").html(female1519);
-                jq("#totalEnrolledEligibleMtZSampleF20To24").html(female2024)
-                jq("#totalEnrolledEligibleMtZSampleFabove24").html(femaleabove24)
+                jq("#totalEnrolledEligibleMtZSampleF10To14_"+currMonth).html(female1014)
+                jq("#totalEnrolledEligibleMtZSampleF15To19_"+currMonth).html(female1519);
+                jq("#totalEnrolledEligibleMtZSampleF20To24_"+currMonth).html(female2024)
+                jq("#totalEnrolledEligibleMtZSampleFabove24_"+currMonth).html(femaleabove24)
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#totalEnrolledEligibleMtZSampleTotal").html(total)
+                jq("#totalEnrolledEligibleMtZSampleTotal_"+currMonth).html(total)
                 
                 
                 
@@ -1090,18 +1102,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#totalEnrolledB1000MZ200M10To14").html(male1014)
-                jq("#totalEnrolledB1000MZ200M15To19").html(male1519)
-                jq("#totalEnrolledB1000MZ200M20To24").html(male2024)
-                jq("#totalEnrolledB1000MZ200Mabove24").html(maleabove24)
+                jq("#totalEnrolledB1000MZ200M10To14_"+currMonth).html(male1014)
+                jq("#totalEnrolledB1000MZ200M15To19_"+currMonth).html(male1519)
+                jq("#totalEnrolledB1000MZ200M20To24_"+currMonth).html(male2024)
+                jq("#totalEnrolledB1000MZ200Mabove24_"+currMonth).html(maleabove24)
                 
-                jq("#totalEnrolledB1000MZ200F10To14").html(female1014)
-                jq("#totalEnrolledB1000MZ200F15To19").html(female1519);
-                jq("#totalEnrolledB1000MZ200F20To24").html(female2024)
-                jq("#totalEnrolledB1000MZ200Fabove24").html(femaleabove24)
+                jq("#totalEnrolledB1000MZ200F10To14_"+currMonth).html(female1014)
+                jq("#totalEnrolledB1000MZ200F15To19_"+currMonth).html(female1519);
+                jq("#totalEnrolledB1000MZ200F20To24_"+currMonth).html(female2024)
+                jq("#totalEnrolledB1000MZ200Fabove24_"+currMonth).html(femaleabove24)
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#totalEnrolledB1000MZ200Total").html(total)
+                jq("#totalEnrolledB1000MZ200Total_"+currMonth).html(total)
                 
                 
                 
@@ -1117,19 +1129,19 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#totalEnrolledB1000MZ200To1000M10To14").html(male1014)
-                jq("#totalEnrolledB1000MZ200To1000M15To19").html(male1519)
-                jq("#totalEnrolledB1000MZ200To1000M20To24").html(male2024)
-                jq("#totalEnrolledB1000MZ200To1000Mabove24").html(maleabove24)
+                jq("#totalEnrolledB1000MZ200To1000M10To14_"+currMonth).html(male1014)
+                jq("#totalEnrolledB1000MZ200To1000M15To19_"+currMonth).html(male1519)
+                jq("#totalEnrolledB1000MZ200To1000M20To24_"+currMonth).html(male2024)
+                jq("#totalEnrolledB1000MZ200To1000Mabove24_"+currMonth).html(maleabove24)
                 
-                jq("#totalEnrolledB1000MZ200To1000F10To14").html(female1014)
-                jq("#totalEnrolledB1000MZ200To1000F15To19").html(female1519);
-                jq("#totalEnrolledB1000MZ200To1000F20To24").html(female2024)
-                jq("#totalEnrolledB1000MZ200To1000Fabove24").html(femaleabove24)
+                jq("#totalEnrolledB1000MZ200To1000F10To14_"+currMonth).html(female1014)
+                jq("#totalEnrolledB1000MZ200To1000F15To19_"+currMonth).html(female1519);
+                jq("#totalEnrolledB1000MZ200To1000F20To24_"+currMonth).html(female2024)
+                jq("#totalEnrolledB1000MZ200To1000Fabove24_"+currMonth).html(femaleabove24)
                 
                 
                  var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#totalEnrolledB1000MZ200To1000Total").html(total)
+                jq("#totalEnrolledB1000MZ200To1000Total_"+currMonth).html(total)
                 
                 
                 
@@ -1146,18 +1158,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#totalEnrolledB1000MZ1000M10To14").html(male1014)
-                jq("#totalEnrolledB1000MZ1000M15To19").html(male1519)
-                jq("#totalEnrolledB1000MZ1000M20To24").html(male2024)
-                jq("#totalEnrolledB1000MZ1000Mabove24").html(maleabove24)
+                jq("#totalEnrolledB1000MZ1000M10To14_"+currMonth).html(male1014)
+                jq("#totalEnrolledB1000MZ1000M15To19_"+currMonth).html(male1519)
+                jq("#totalEnrolledB1000MZ1000M20To24_"+currMonth).html(male2024)
+                jq("#totalEnrolledB1000MZ1000Mabove24_"+currMonth).html(maleabove24)
                 
-                jq("#totalEnrolledB1000MZ1000F10To14").html(female1014)
-                jq("#totalEnrolledB1000MZ1000F15To19").html(female1519);
-                jq("#totalEnrolledB1000MZ1000F20To24").html(female2024)
-                jq("#totalEnrolledB1000MZ1000Fabove24").html(femaleabove24)
+                jq("#totalEnrolledB1000MZ1000F10To14_"+currMonth).html(female1014)
+                jq("#totalEnrolledB1000MZ1000F15To19_"+currMonth).html(female1519);
+                jq("#totalEnrolledB1000MZ1000F20To24_"+currMonth).html(female2024)
+                jq("#totalEnrolledB1000MZ1000Fabove24_"+currMonth).html(femaleabove24)
                 
                  var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#totalEnrolledB1000MZ1000Total").html(total)
+                jq("#totalEnrolledB1000MZ1000Total_"+currMonth).html(total)
 
                 
                 
@@ -1175,19 +1187,19 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#scheduledPickupFUM10To14").html(male1014)
-                jq("#scheduledPickupFUM15To19").html(male1519)
-                jq("#scheduledPickupFUM20To24").html(male2024)
-                jq("#scheduledPickupFUMabove24").html(maleabove24)
+                jq("#scheduledPickupFUM10To14_"+currMonth).html(male1014)
+                jq("#scheduledPickupFUM15To19_"+currMonth).html(male1519)
+                jq("#scheduledPickupFUM20To24_"+currMonth).html(male2024)
+                jq("#scheduledPickupFUMabove24_"+currMonth).html(maleabove24)
                 
-                jq("#scheduledPickupFUF10To14").html(female1014)
-                jq("#scheduledPickupFUF15To19").html(female1519);
-                jq("#scheduledPickupFUF20To24").html(female2024)
-                jq("#scheduledPickupFUFabove24").html(femaleabove24)
+                jq("#scheduledPickupFUF10To14_"+currMonth).html(female1014)
+                jq("#scheduledPickupFUF15To19_"+currMonth).html(female1519);
+                jq("#scheduledPickupFUF20To24_"+currMonth).html(female2024)
+                jq("#scheduledPickupFUFabove24_"+currMonth).html(femaleabove24)
                 
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#scheduledPickupFUTotal").html(total)
+                jq("#scheduledPickupFUTotal_"+currMonth).html(total)
                 
                 
                 
@@ -1205,18 +1217,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#scheduledKeptPickupFUM10To14").html(male1014)
-                jq("#scheduledKeptPickupFUM15To19").html(male1519)
-                jq("#scheduledKeptPickupFUM20To24").html(male2024)
-                jq("#scheduledKeptPickupFUMabove24").html(maleabove24)
+                jq("#scheduledKeptPickupFUM10To14_"+currMonth).html(male1014)
+                jq("#scheduledKeptPickupFUM15To19_"+currMonth).html(male1519)
+                jq("#scheduledKeptPickupFUM20To24_"+currMonth).html(male2024)
+                jq("#scheduledKeptPickupFUMabove24_"+currMonth).html(maleabove24)
                 
-                jq("#scheduledKeptPickupFUF10To14").html(female1014)
-                jq("#scheduledKeptPickupFUF15To19").html(female1519);
-                jq("#scheduledKeptPickupFUF20To24").html(female2024);
-                jq("#scheduledKeptPickupFUFabove24").html(femaleabove24);
+                jq("#scheduledKeptPickupFUF10To14_"+currMonth).html(female1014)
+                jq("#scheduledKeptPickupFUF15To19_"+currMonth).html(female1519);
+                jq("#scheduledKeptPickupFUF20To24_"+currMonth).html(female2024);
+                jq("#scheduledKeptPickupFUFabove24_"+currMonth).html(femaleabove24);
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#scheduledKeptPickupFUTotal").html(total)
+                jq("#scheduledKeptPickupFUTotal_"+currMonth).html(total)
                 
                 
                 return  myAjax({startDate:startDate, endDate:endDate, ageType:ageTyp}, '${ ui.actionLink("getTotalEnrolledWithGoodAdhScoreAfter") }');
@@ -1231,18 +1243,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#goodAdhFUM10To14").html(male1014)
-                jq("#goodAdhFUM15To19").html(male1519)
-                jq("#goodAdhFUM20To24").html(male2024)
-                jq("#goodAdhFUMabove24").html(maleabove24)
+                jq("#goodAdhFUM10To14_"+currMonth).html(male1014)
+                jq("#goodAdhFUM15To19_"+currMonth).html(male1519)
+                jq("#goodAdhFUM20To24_"+currMonth).html(male2024)
+                jq("#goodAdhFUMabove24_"+currMonth).html(maleabove24)
                 
-                jq("#goodAdhFUF10To14").html(female1014)
-                jq("#goodAdhFUF15To19").html(female1519);
-                jq("#goodAdhFUF20To24").html(female2024)
-                jq("#goodAdhFUFabove24").html(femaleabove24)
+                jq("#goodAdhFUF10To14_"+currMonth).html(female1014)
+                jq("#goodAdhFUF15To19_"+currMonth).html(female1519);
+                jq("#goodAdhFUF20To24_"+currMonth).html(female2024)
+                jq("#goodAdhFUFabove24_"+currMonth).html(femaleabove24)
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#goodAdhFUTotal").html(total)
+                jq("#goodAdhFUTotal_"+currMonth).html(total)
                 
                 
                 
@@ -1259,18 +1271,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#eligibleFUM10To14").html(male1014)
-                jq("#eligibleFUM15To19").html(male1519)
-                jq("#eligibleFUM20To24").html(male2024)
-                jq("#eligibleFUMabove24").html(maleabove24)
+                jq("#eligibleFUM10To14_"+currMonth).html(male1014)
+                jq("#eligibleFUM15To19_"+currMonth).html(male1519)
+                jq("#eligibleFUM20To24_"+currMonth).html(male2024)
+                jq("#eligibleFUMabove24_"+currMonth).html(maleabove24)
                 
-                jq("#eligibleFUF10To14").html(female1014)
-                jq("#eligibleFUF15To19").html(female1519);
-                jq("#eligibleFUF20To24").html(female2024)
-                jq("#eligibleFUFabove24").html(femaleabove24)
+                jq("#eligibleFUF10To14_"+currMonth).html(female1014)
+                jq("#eligibleFUF15To19_"+currMonth).html(female1519);
+                jq("#eligibleFUF20To24_"+currMonth).html(female2024)
+                jq("#eligibleFUFabove24_"+currMonth).html(femaleabove24)
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#eligibleFUTotal").html(total)
+                jq("#eligibleFUTotal_"+currMonth).html(total)
                 
                 
                 
@@ -1286,18 +1298,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#samplesTakenM10To14").html(male1014)
-                jq("#samplesTakenM15To19").html(male1519)
-                jq("#samplesTakenM20To24").html(male2024)
-                jq("#samplesTakenMabove24").html(maleabove24)
+                jq("#samplesTakenM10To14_"+currMonth).html(male1014)
+                jq("#samplesTakenM15To19_"+currMonth).html(male1519)
+                jq("#samplesTakenM20To24_"+currMonth).html(male2024)
+                jq("#samplesTakenMabove24_"+currMonth).html(maleabove24)
                 
-                jq("#samplesTakenF10To14").html(female1014)
-                jq("#samplesTakenF15To19").html(female1519);
-                jq("#samplesTakenF20To24").html(female2024)
-                jq("#samplesTakenFabove24").html(femaleabove24)
+                jq("#samplesTakenF10To14_"+currMonth).html(female1014)
+                jq("#samplesTakenF15To19_"+currMonth).html(female1519);
+                jq("#samplesTakenF20To24_"+currMonth).html(female2024)
+                jq("#samplesTakenFabove24_"+currMonth).html(femaleabove24)
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#samplesTakenTotal").html(total)
+                jq("#samplesTakenTotal_"+currMonth).html(total)
                 
                 
                 
@@ -1314,18 +1326,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#samplesTakenResultM10To14").html(male1014)
-                jq("#samplesTakenResultM15To19").html(male1519)
-                jq("#samplesTakenResultM20To24").html(male2024)
-                jq("#samplesTakenResultMabove24").html(maleabove24)
+                jq("#samplesTakenResultM10To14_"+currMonth).html(male1014)
+                jq("#samplesTakenResultM15To19_"+currMonth).html(male1519)
+                jq("#samplesTakenResultM20To24_"+currMonth).html(male2024)
+                jq("#samplesTakenResultMabove24_"+currMonth).html(maleabove24)
                 
-                jq("#samplesTakenResultF10To14").html(female1014)
-                jq("#samplesTakenResultF15To19").html(female1519);
-                jq("#samplesTakenResultF20To24").html(female2024)
-                jq("#samplesTakenResultFabove24").html(femaleabove24)
+                jq("#samplesTakenResultF10To14_"+currMonth).html(female1014)
+                jq("#samplesTakenResultF15To19_"+currMonth).html(female1519);
+                jq("#samplesTakenResultF20To24_"+currMonth).html(female2024)
+                jq("#samplesTakenResultFabove24_"+currMonth).html(femaleabove24)
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#samplesTakenResultTotal").html(total)
+                jq("#samplesTakenResultTotal_"+currMonth).html(total)
                 
                 
                 
@@ -1341,18 +1353,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#samplesTakenResult200M10To14").html(male1014)
-                jq("#samplesTakenResult200M15To19").html(male1519)
-                jq("#samplesTakenResult200M20To24").html(male2024)
-                jq("#samplesTakenResult200Mabove24").html(maleabove24)
+                jq("#samplesTakenResult200M10To14_"+currMonth).html(male1014)
+                jq("#samplesTakenResult200M15To19_"+currMonth).html(male1519)
+                jq("#samplesTakenResult200M20To24_"+currMonth).html(male2024)
+                jq("#samplesTakenResult200Mabove24_"+currMonth).html(maleabove24)
                 
-                jq("#samplesTakenResult200F10To14").html(female1014)
-                jq("#samplesTakenResult200F15To19").html(female1519);
-                jq("#samplesTakenResult200F20To24").html(female2024)
-                jq("#samplesTakenResult200Fabove24").html(femaleabove24)
+                jq("#samplesTakenResult200F10To14_"+currMonth).html(female1014)
+                jq("#samplesTakenResult200F15To19_"+currMonth).html(female1519);
+                jq("#samplesTakenResult200F20To24_"+currMonth).html(female2024)
+                jq("#samplesTakenResult200Fabove24_"+currMonth).html(femaleabove24)
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#samplesTakenResult200Total").html(total)
+                jq("#samplesTakenResult200Total_"+currMonth).html(total)
                 
                 
                 
@@ -1368,18 +1380,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#samplesTakenResult200To1000M10To14").html(male1014)
-                jq("#samplesTakenResult200To1000M15To19").html(male1519)
-                jq("#samplesTakenResult200To1000M20To24").html(male2024)
-                jq("#samplesTakenResult200To1000Mabove24").html(maleabove24)
+                jq("#samplesTakenResult200To1000M10To14_"+currMonth).html(male1014)
+                jq("#samplesTakenResult200To1000M15To19_"+currMonth).html(male1519)
+                jq("#samplesTakenResult200To1000M20To24_"+currMonth).html(male2024)
+                jq("#samplesTakenResult200To1000Mabove24_"+currMonth).html(maleabove24)
                 
-                jq("#samplesTakenResult200To1000F10To14").html(female1014)
-                jq("#samplesTakenResult200To1000F15To19").html(female1519);
-                jq("#samplesTakenResult200To1000F20To24").html(female2024)
-                jq("#samplesTakenResult200To1000Fabove24").html(femaleabove24)
+                jq("#samplesTakenResult200To1000F10To14_"+currMonth).html(female1014)
+                jq("#samplesTakenResult200To1000F15To19_"+currMonth).html(female1519);
+                jq("#samplesTakenResult200To1000F20To24_"+currMonth).html(female2024)
+                jq("#samplesTakenResult200To1000Fabove24_"+currMonth).html(femaleabove24)
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#samplesTakenResult200To1000Total").html(total)
+                jq("#samplesTakenResult200To1000Total_"+currMonth).html(total)
                 
                 
                 
@@ -1395,18 +1407,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#samplesTakenResult1000M10To14").html(male1014)
-                jq("#samplesTakenResult1000M15To19").html(male1519)
-                jq("#samplesTakenResult1000M20To24").html(male2024)
-                jq("#samplesTakenResult1000Mabove24").html(maleabove24)
+                jq("#samplesTakenResult1000M10To14_"+currMonth).html(male1014)
+                jq("#samplesTakenResult1000M15To19_"+currMonth).html(male1519)
+                jq("#samplesTakenResult1000M20To24_"+currMonth).html(male2024)
+                jq("#samplesTakenResult1000Mabove24_"+currMonth).html(maleabove24)
                 
-                jq("#samplesTakenResult1000F10To14").html(female1014)
-                jq("#samplesTakenResult1000F15To19").html(female1519);
-                jq("#samplesTakenResult1000F20To24").html(female2024)
-                jq("#samplesTakenResult1000Fabove24").html(femaleabove24)
+                jq("#samplesTakenResult1000F10To14_"+currMonth).html(female1014)
+                jq("#samplesTakenResult1000F15To19_"+currMonth).html(female1519);
+                jq("#samplesTakenResult1000F20To24_"+currMonth).html(female2024)
+                jq("#samplesTakenResult1000Fabove24_"+currMonth).html(femaleabove24)
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#samplesTakenResult1000Total").html(total)
+                jq("#samplesTakenResult1000Total_"+currMonth).html(total)
                 
                 
                 
@@ -1423,18 +1435,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#resultPast12MtM10To14").html(male1014)
-                jq("#resultPast12MtM15To19").html(male1519)
-                jq("#resultPast12MtM20To24").html(male2024)
-                jq("#resultPast12MtMabove24").html(maleabove24)
+                jq("#resultPast12MtM10To14_"+currMonth).html(male1014)
+                jq("#resultPast12MtM15To19_"+currMonth).html(male1519)
+                jq("#resultPast12MtM20To24_"+currMonth).html(male2024)
+                jq("#resultPast12MtMabove24_"+currMonth).html(maleabove24)
                 
-                jq("#resultPast12MtF10To14").html(female1014)
-                jq("#resultPast12MtF15To19").html(female1519);
-                jq("#resultPast12MtF20To24").html(female2024)
-                jq("#resultPast12MtFabove24").html(femaleabove24)
+                jq("#resultPast12MtF10To14_"+currMonth).html(female1014)
+                jq("#resultPast12MtF15To19_"+currMonth).html(female1519);
+                jq("#resultPast12MtF20To24_"+currMonth).html(female2024)
+                jq("#resultPast12MtFabove24_"+currMonth).html(femaleabove24)
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#resultPast12MtTotal").html(total)
+                jq("#resultPast12MtTotal_"+currMonth).html(total)
                 
                 
                 
@@ -1451,18 +1463,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#resultPast12Mt200M10To14").html(male1014)
-                jq("#resultPast12Mt200M15To19").html(male1519)
-                jq("#resultPast12Mt200M20To24").html(male2024)
-                jq("#resultPast12Mt200Mabove24").html(maleabove24)
+                jq("#resultPast12Mt200M10To14_"+currMonth).html(male1014)
+                jq("#resultPast12Mt200M15To19_"+currMonth).html(male1519)
+                jq("#resultPast12Mt200M20To24_"+currMonth).html(male2024)
+                jq("#resultPast12Mt200Mabove24_"+currMonth).html(maleabove24)
                 
-                jq("#resultPast12Mt200F10To14").html(female1014)
-                jq("#resultPast12Mt200F15To19").html(female1519);
-                jq("#resultPast12Mt200F20To24").html(female2024)
-                jq("#resultPast12Mt200Fabove24").html(femaleabove24)
+                jq("#resultPast12Mt200F10To14_"+currMonth).html(female1014)
+                jq("#resultPast12Mt200F15To19_"+currMonth).html(female1519);
+                jq("#resultPast12Mt200F20To24_"+currMonth).html(female2024)
+                jq("#resultPast12Mt200Fabove24_"+currMonth).html(femaleabove24)
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#resultPast12Mt200Total").html(total)
+                jq("#resultPast12Mt200Total_"+currMonth).html(total)
                 
                 
                 
@@ -1479,18 +1491,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#resultPast12Mt200To100M10To14").html(male1014)
-                jq("#resultPast12Mt200To100M15To19").html(male1519)
-                jq("#resultPast12Mt200To100M20To24").html(male2024)
-                jq("#resultPast12Mt200To100Mabove24").html(maleabove24)
+                jq("#resultPast12Mt200To100M10To14_"+currMonth).html(male1014)
+                jq("#resultPast12Mt200To100M15To19_"+currMonth).html(male1519)
+                jq("#resultPast12Mt200To100M20To24_"+currMonth).html(male2024)
+                jq("#resultPast12Mt200To100Mabove24_"+currMonth).html(maleabove24)
                 
-                jq("#resultPast12Mt200To100F10To14").html(female1014)
-                jq("#resultPast12Mt200To100F15To19").html(female1519);
-                jq("#resultPast12Mt200To100F20To24").html(female2024)
-                jq("#resultPast12Mt200To100Fabove24").html(femaleabove24)
+                jq("#resultPast12Mt200To100F10To14_"+currMonth).html(female1014)
+                jq("#resultPast12Mt200To100F15To19_"+currMonth).html(female1519);
+                jq("#resultPast12Mt200To100F20To24_"+currMonth).html(female2024)
+                jq("#resultPast12Mt200To100Fabove24_"+currMonth).html(femaleabove24)
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#resultPast12Mt200To100Total").html(total)
+                jq("#resultPast12Mt200To100Total_"+currMonth).html(total)
                 
                 
                 
@@ -1508,18 +1520,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#resultPast12Mt1000M10To14").html(male1014)
-                jq("#resultPast12Mt1000M15To19").html(male1519)
-                jq("#resultPast12Mt1000M20To24").html(male2024)
-                jq("#resultPast12Mt1000Mabove24").html(maleabove24)
+                jq("#resultPast12Mt1000M10To14_"+currMonth).html(male1014)
+                jq("#resultPast12Mt1000M15To19_"+currMonth).html(male1519)
+                jq("#resultPast12Mt1000M20To24_"+currMonth).html(male2024)
+                jq("#resultPast12Mt1000Mabove24_"+currMonth).html(maleabove24)
                 
-                jq("#resultPast12Mt1000F10To14").html(female1014)
-                jq("#resultPast12Mt1000F15To19").html(female1519);
-                jq("#resultPast12Mt1000F20To24").html(female2024)
-                jq("#resultPast12Mt1000Fabove24").html(femaleabove24)
+                jq("#resultPast12Mt1000F10To14_"+currMonth).html(female1014)
+                jq("#resultPast12Mt1000F15To19_"+currMonth).html(female1519);
+                jq("#resultPast12Mt1000F20To24_"+currMonth).html(female2024)
+                jq("#resultPast12Mt1000Fabove24_"+currMonth).html(femaleabove24)
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#resultPast12Mt1000Total").html(total)
+                jq("#resultPast12Mt1000Total_"+currMonth).html(total)
                 
                 
                 
@@ -1536,19 +1548,19 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#resultPast12Mt1000EACM10To14").html(male1014)
-                jq("#resultPast12Mt1000EACM15To19").html(male1519)
-                jq("#resultPast12Mt1000EACM20To24").html(male2024)
-                jq("#resultPast12Mt1000EACMabove24").html(maleabove24)
+                jq("#resultPast12Mt1000EACM10To14_"+currMonth).html(male1014)
+                jq("#resultPast12Mt1000EACM15To19_"+currMonth).html(male1519)
+                jq("#resultPast12Mt1000EACM20To24_"+currMonth).html(male2024)
+                jq("#resultPast12Mt1000EACMabove24_"+currMonth).html(maleabove24)
                 
-                jq("#resultPast12Mt1000EACF10To14").html(female1014)
-                jq("#resultPast12Mt1000EACF15To19").html(female1519);
-                jq("#resultPast12Mt1000EACF20To24").html(female2024)
-                jq("#resultPast12Mt1000EACFabove24").html(femaleabove24)
+                jq("#resultPast12Mt1000EACF10To14_"+currMonth).html(female1014)
+                jq("#resultPast12Mt1000EACF15To19_"+currMonth).html(female1519);
+                jq("#resultPast12Mt1000EACF20To24_"+currMonth).html(female2024)
+                jq("#resultPast12Mt1000EACFabove24_"+currMonth).html(femaleabove24)
                 
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#resultPast12Mt1000EACTotal").html(total)
+                jq("#resultPast12Mt1000EACTotal_"+currMonth).html(total)
                 
                 
                 return  myAjax({startDate:startDate, endDate:endDate, ageType:ageTyp}, '${ ui.actionLink("getTotalEnrolledWithVLPast12MonthsResultAbove1000WithRepeatVl") }');
@@ -1564,18 +1576,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#resultPast12Mt1000RepeatM10To14").html(male1014)
-                jq("#resultPast12Mt1000RepeatM15To19").html(male1519)
-                jq("#resultPast12Mt1000RepeatM20To24").html(male2024)
-                jq("#resultPast12Mt1000RepeatMabove24").html(maleabove24)
+                jq("#resultPast12Mt1000RepeatM10To14_"+currMonth).html(male1014)
+                jq("#resultPast12Mt1000RepeatM15To19_"+currMonth).html(male1519)
+                jq("#resultPast12Mt1000RepeatM20To24_"+currMonth).html(male2024)
+                jq("#resultPast12Mt1000RepeatMabove24_"+currMonth).html(maleabove24)
                 
-                jq("#resultPast12Mt1000RepeatF10To14").html(female1014)
-                jq("#resultPast12Mt1000RepeatF15To19").html(female1519);
-                jq("#resultPast12Mt1000RepeatF20To24").html(female2024)
-                jq("#resultPast12Mt1000RepeatFabove24").html(femaleabove24)
+                jq("#resultPast12Mt1000RepeatF10To14_"+currMonth).html(female1014)
+                jq("#resultPast12Mt1000RepeatF15To19_"+currMonth).html(female1519);
+                jq("#resultPast12Mt1000RepeatF20To24_"+currMonth).html(female2024)
+                jq("#resultPast12Mt1000RepeatFabove24_"+currMonth).html(femaleabove24)
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#resultPast12Mt1000RepeatTotal").html(total)
+                jq("#resultPast12Mt1000RepeatTotal_"+currMonth).html(total)
                 
                 
                 
@@ -1592,19 +1604,19 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#resultPast12Mt1000Repeat200M10To14").html(male1014)
-                jq("#resultPast12Mt1000Repeat200M15To19").html(male1519)
-                jq("#resultPast12Mt1000Repeat200M20To24").html(male2024)
-                jq("#resultPast12Mt1000Repeat200Mabove24").html(maleabove24)
+                jq("#resultPast12Mt1000Repeat200M10To14_"+currMonth).html(male1014)
+                jq("#resultPast12Mt1000Repeat200M15To19_"+currMonth).html(male1519)
+                jq("#resultPast12Mt1000Repeat200M20To24_"+currMonth).html(male2024)
+                jq("#resultPast12Mt1000Repeat200Mabove24_"+currMonth).html(maleabove24)
                 
-                jq("#resultPast12Mt1000Repeat200F10To14").html(female1014)
-                jq("#resultPast12Mt1000Repeat200F15To19").html(female1519);
-                jq("#resultPast12Mt1000Repeat200F20To24").html(female2024)
-                jq("#resultPast12Mt1000Repeat200Fabove24").html(femaleabove24)
+                jq("#resultPast12Mt1000Repeat200F10To14_"+currMonth).html(female1014)
+                jq("#resultPast12Mt1000Repeat200F15To19_"+currMonth).html(female1519);
+                jq("#resultPast12Mt1000Repeat200F20To24_"+currMonth).html(female2024)
+                jq("#resultPast12Mt1000Repeat200Fabove24_"+currMonth).html(femaleabove24)
                 
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#resultPast12Mt1000Repeat200Total").html(total)
+                jq("#resultPast12Mt1000Repeat200Total_"+currMonth).html(total)
                 
                 return  myAjax({startDate:startDate, endDate:endDate, ageType:ageTyp}, '${ ui.actionLink("getTotalEnrolledWithVLPast12MonthsResultAbove1000WithRepeatVlAbove200Below1000") }');
             })
@@ -1618,18 +1630,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#resultPast12Mt1000Repeat200To1000M10To14").html(male1014)
-                jq("#resultPast12Mt1000Repeat200To1000M15To19").html(male1519)
-                jq("#resultPast12Mt1000Repeat200To1000M20To24").html(male2024)
-                jq("#resultPast12Mt1000Repeat200To1000Mabove24").html(maleabove24)
+                jq("#resultPast12Mt1000Repeat200To1000M10To14_"+currMonth).html(male1014)
+                jq("#resultPast12Mt1000Repeat200To1000M15To19_"+currMonth).html(male1519)
+                jq("#resultPast12Mt1000Repeat200To1000M20To24_"+currMonth).html(male2024)
+                jq("#resultPast12Mt1000Repeat200To1000Mabove24_"+currMonth).html(maleabove24)
                 
-                jq("#resultPast12Mt1000Repeat200To1000F10To14").html(female1014)
-                jq("#resultPast12Mt1000Repeat200To1000F15To19").html(female1519);
-                jq("#resultPast12Mt1000Repeat200To1000F20To24").html(female2024)
-                jq("#resultPast12Mt1000Repeat200To1000Fabove24").html(femaleabove24)
+                jq("#resultPast12Mt1000Repeat200To1000F10To14_"+currMonth).html(female1014)
+                jq("#resultPast12Mt1000Repeat200To1000F15To19_"+currMonth).html(female1519);
+                jq("#resultPast12Mt1000Repeat200To1000F20To24_"+currMonth).html(female2024)
+                jq("#resultPast12Mt1000Repeat200To1000Fabove24_"+currMonth).html(femaleabove24)
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#resultPast12Mt1000Repeat200To1000Total").html(total)
+                jq("#resultPast12Mt1000Repeat200To1000Total_"+currMonth).html(total)
                 
                 return  myAjax({startDate:startDate, endDate:endDate, ageType:ageTyp}, '${ ui.actionLink("getTotalEnrolledWithVLPast12MonthsResultAbove1000WithRepeatVlAbove1000") }');
             })
@@ -1644,18 +1656,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#resultPast12Mt1000Repeat1000M10To14").html(male1014)
-                jq("#resultPast12Mt1000Repeat1000M15To19").html(male1519)
-                jq("#resultPast12Mt1000Repeat1000M20To24").html(male2024)
-                jq("#resultPast12Mt1000Repeat1000Mabove24").html(maleabove24)
+                jq("#resultPast12Mt1000Repeat1000M10To14_"+currMonth).html(male1014)
+                jq("#resultPast12Mt1000Repeat1000M15To19_"+currMonth).html(male1519)
+                jq("#resultPast12Mt1000Repeat1000M20To24_"+currMonth).html(male2024)
+                jq("#resultPast12Mt1000Repeat1000Mabove24_"+currMonth).html(maleabove24)
                 
-                jq("#resultPast12Mt1000Repeat1000F10To14").html(female1014)
-                jq("#resultPast12Mt1000Repeat1000F15To19").html(female1519);
-                jq("#resultPast12Mt1000Repeat1000F20To24").html(female2024)
-                jq("#resultPast12Mt1000Repeat1000Fabove24").html(femaleabove24)
+                jq("#resultPast12Mt1000Repeat1000F10To14_"+currMonth).html(female1014)
+                jq("#resultPast12Mt1000Repeat1000F15To19_"+currMonth).html(female1519);
+                jq("#resultPast12Mt1000Repeat1000F20To24_"+currMonth).html(female2024)
+                jq("#resultPast12Mt1000Repeat1000Fabove24_"+currMonth).html(femaleabove24)
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#resultPast12Mt1000Repeat1000Total").html(total)
+                jq("#resultPast12Mt1000Repeat1000Total_"+currMonth).html(total)
                 
                 return  myAjax({startDate:startDate, endDate:endDate, ageType:ageTyp}, '${ ui.actionLink("getTotalEnrolledWithSwitchTo2ndLine") }');
             })
@@ -1669,18 +1681,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#switchTo2ndM10To14").html(male1014)
-                jq("#switchTo2ndM15To19").html(male1519)
-                jq("#switchTo2ndM20To24").html(male2024)
-                jq("#switchTo2ndMabove24").html(maleabove24)
+                jq("#switchTo2ndM10To14_"+currMonth).html(male1014)
+                jq("#switchTo2ndM15To19_"+currMonth).html(male1519)
+                jq("#switchTo2ndM20To24_"+currMonth).html(male2024)
+                jq("#switchTo2ndMabove24_"+currMonth).html(maleabove24)
                 
-                jq("#switchTo2ndF10To14").html(female1014)
-                jq("#switchTo2ndF15To19").html(female1519);
-                jq("#switchTo2ndF20To24").html(female2024)
-                jq("#switchTo2ndFabove24").html(femaleabove24)
+                jq("#switchTo2ndF10To14_"+currMonth).html(female1014)
+                jq("#switchTo2ndF15To19_"+currMonth).html(female1519);
+                jq("#switchTo2ndF20To24_"+currMonth).html(female2024)
+                jq("#switchTo2ndFabove24_"+currMonth).html(femaleabove24)
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#switchTo2ndTotal").html(total)
+                jq("#switchTo2ndTotal_"+currMonth).html(total)
                 
                 return  myAjax({startDate:startDate, endDate:endDate, ageType:ageTyp}, '${ ui.actionLink("getTotalEnrolledWithSwitchTo3rdLine") }');
             })
@@ -1696,18 +1708,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#switchTo3rdM10To14").html(male1014)
-                jq("#switchTo3rdM15To19").html(male1519)
-                jq("#switchTo3rdM20To24").html(male2024)
-                jq("#switchTo3rdMabove24").html(maleabove24)
+                jq("#switchTo3rdM10To14_"+currMonth).html(male1014)
+                jq("#switchTo3rdM15To19_"+currMonth).html(male1519)
+                jq("#switchTo3rdM20To24_"+currMonth).html(male2024)
+                jq("#switchTo3rdMabove24_"+currMonth).html(maleabove24)
                 
-                jq("#switchTo3rdF10To14").html(female1014)
-                jq("#switchTo3rdF15To19").html(female1519);
-                jq("#switchTo3rdF20To24").html(female2024)
-                jq("#switchTo3rdFabove24").html(femaleabove24)
+                jq("#switchTo3rdF10To14_"+currMonth).html(female1014)
+                jq("#switchTo3rdF15To19_"+currMonth).html(female1519);
+                jq("#switchTo3rdF20To24_"+currMonth).html(female2024)
+                jq("#switchTo3rdFabove24_"+currMonth).html(femaleabove24)
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#switchTo3rdTotal").html(total)
+                jq("#switchTo3rdTotal_"+currMonth).html(total)
                 
                 return  myAjax({startDate:startDate, endDate:endDate, ageType:ageTyp}, '${ ui.actionLink("getTotalAYPLHIVEnrolledInOTZWhoComplete7") }');
             }).then(function(response){
@@ -1720,18 +1732,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#completed7M10To14").html(male1014)
-                jq("#completed7M15To19").html(male1519)
-                jq("#completed7M20To24").html(male2024)
-                jq("#completed7Mabove24").html(maleabove24)
+                jq("#completed7M10To14_"+currMonth).html(male1014)
+                jq("#completed7M15To19_"+currMonth).html(male1519)
+                jq("#completed7M20To24_"+currMonth).html(male2024)
+                jq("#completed7Mabove24_"+currMonth).html(maleabove24)
                 
-                jq("#completed7F10To14").html(female1014)
-                jq("#completed7F15To19").html(female1519);
-                jq("#completed7F20To24").html(female2024)
-                jq("#completed7Fabove24").html(femaleabove24)
+                jq("#completed7F10To14_"+currMonth).html(female1014)
+                jq("#completed7F15To19_"+currMonth).html(female1519);
+                jq("#completed7F20To24_"+currMonth).html(female2024)
+                jq("#completed7Fabove24_"+currMonth).html(femaleabove24)
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#completed7Total").html(total)
+                jq("#completed7Total_"+currMonth).html(total)
                 
                 totalCompleted7 = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24)  ;
                 console.log("total Completed", totalCompleted7);
@@ -1749,18 +1761,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#transferredOutM10To14").html(male1014)
-                jq("#transferredOutM15To19").html(male1519)
-                jq("#transferredOutM20To24").html(male2024)
-                jq("#transferredOutMabove24").html(maleabove24)
+                jq("#transferredOutM10To14_"+currMonth).html(male1014)
+                jq("#transferredOutM15To19_"+currMonth).html(male1519)
+                jq("#transferredOutM20To24_"+currMonth).html(male2024)
+                jq("#transferredOutMabove24_"+currMonth).html(maleabove24)
                 
-                jq("#transferredOutF10To14").html(female1014)
-                jq("#transferredOutF15To19").html(female1519);
-                jq("#transferredOutF20To24").html(female2024)
-                jq("#transferredOutFabove24").html(femaleabove24)
+                jq("#transferredOutF10To14_"+currMonth).html(female1014)
+                jq("#transferredOutF15To19_"+currMonth).html(female1519);
+                jq("#transferredOutF20To24_"+currMonth).html(female2024)
+                jq("#transferredOutFabove24_"+currMonth).html(femaleabove24)
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#transferredOutTotal").html(total)
+                jq("#transferredOutTotal_"+currMonth).html(total)
                 
                 totalTransferred =  new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24)  ;
                 
@@ -1780,18 +1792,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
                 
-                jq("#ltfuM10To14").html(male1014)
-                jq("#ltfuM15To19").html(male1519)
-                jq("#ltfuM20To24").html(male2024)
-                jq("#ltfuMabove24").html(maleabove24)
+                jq("#ltfuM10To14_"+currMonth).html(male1014)
+                jq("#ltfuM15To19_"+currMonth).html(male1519)
+                jq("#ltfuM20To24_"+currMonth).html(male2024)
+                jq("#ltfuMabove24_"+currMonth).html(maleabove24)
                 
-                jq("#ltfuF10To14").html(female1014)
-                jq("#ltfuF15To19").html(female1519);
-                jq("#ltfuF20To24").html(female2024)
-                jq("#ltfuFabove24").html(femaleabove24)
+                jq("#ltfuF10To14_"+currMonth).html(female1014)
+                jq("#ltfuF15To19_"+currMonth).html(female1519);
+                jq("#ltfuF20To24_"+currMonth).html(female2024)
+                jq("#ltfuFabove24_"+currMonth).html(femaleabove24)
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#ltfuTotal").html(total)
+                jq("#ltfuTotal_"+currMonth).html(total)
                 
                 totalLTFU = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24)  ;
                 return  myAjax({startDate:startDate, endDate:endDate, ageType:ageTyp}, '${ ui.actionLink("getTotalEnrolledAndDiedAfter") }');
@@ -1806,18 +1818,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#deadM10To14").html(male1014)
-                jq("#deadM15To19").html(male1519)
-                jq("#deadM20To24").html(male2024)
-                jq("#deadMabove24").html(maleabove24)
+                jq("#deadM10To14_"+currMonth).html(male1014)
+                jq("#deadM15To19_"+currMonth).html(male1519)
+                jq("#deadM20To24_"+currMonth).html(male2024)
+                jq("#deadMabove24_"+currMonth).html(maleabove24)
                 
-                jq("#deadF10To14").html(female1014)
-                jq("#deadF15To19").html(female1519);
-                jq("#deadF20To24").html(female2024)
-                jq("#deadFabove24").html(femaleabove24)
+                jq("#deadF10To14_"+currMonth).html(female1014)
+                jq("#deadF15To19_"+currMonth).html(female1519);
+                jq("#deadF20To24_"+currMonth).html(female2024)
+                jq("#deadFabove24_"+currMonth).html(femaleabove24)
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#deadTotal").html(total)
+                jq("#deadTotal_"+currMonth).html(total)
                 
                 totalDead = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24)  ;
                 
@@ -1837,18 +1849,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#optedOutM10To14").html(male1014)
-                jq("#optedOutM15To19").html(male1519)
-                jq("#optedOutM20To24").html(male2024)
-                jq("#optedOutMabove24").html(maleabove24)
+                jq("#optedOutM10To14_"+currMonth).html(male1014)
+                jq("#optedOutM15To19_"+currMonth).html(male1519)
+                jq("#optedOutM20To24_"+currMonth).html(male2024)
+                jq("#optedOutMabove24_"+currMonth).html(maleabove24)
                 
-                jq("#optedOutF10To14").html(female1014)
-                jq("#optedOutF15To19").html(female1519);
-                jq("#optedOutF20To24").html(female2024)
-                jq("#optedOutFabove24").html(femaleabove24)
+                jq("#optedOutF10To14_"+currMonth).html(female1014)
+                jq("#optedOutF15To19_"+currMonth).html(female1519);
+                jq("#optedOutF20To24_"+currMonth).html(female2024)
+                jq("#optedOutFabove24_"+currMonth).html(femaleabove24)
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#optedOutTotal").html(total)
+                jq("#optedOutTotal_"+currMonth).html(total)
                 
                 totalOptedOut = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24)  ;
                 
@@ -1867,18 +1879,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
            
                 
-                jq("#transitionedM10To14").html(male1014)
-                jq("#transitionedM15To19").html(male1519)
-                jq("#transitionedM20To24").html(male2024)
-                jq("#transitionedMabove24").html(maleabove24)
+                jq("#transitionedM10To14_"+currMonth).html(male1014)
+                jq("#transitionedM15To19_"+currMonth).html(male1519)
+                jq("#transitionedM20To24_"+currMonth).html(male2024)
+                jq("#transitionedMabove24_"+currMonth).html(maleabove24)
                 
-                jq("#transitionedF10To14").html(female1014)
-                jq("#transitionedF15To19").html(female1519);
-                jq("#transitionedF20To24").html(female2024)
-                jq("#transitionedFabove24").html(femaleabove24)
+                jq("#transitionedF10To14_"+currMonth).html(female1014)
+                jq("#transitionedF15To19_"+currMonth).html(female1519);
+                jq("#transitionedF20To24_"+currMonth).html(female2024)
+                jq("#transitionedFabove24_"+currMonth).html(femaleabove24)
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#transitionedTotal").html(total)
+                jq("#transitionedTotal_"+currMonth).html(total)
                 
                 totalTransitioned = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;;
                 
@@ -1895,18 +1907,18 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var female1519 = data["female15To19"];
                 var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
                 
-                jq("#exitedM10To14").html(male1014)
-                jq("#exitedM15To19").html(male1519)
-                jq("#exitedM20To24").html(male2024)
-                jq("#exitedMabove24").html(maleabove24)
+                jq("#exitedM10To14_"+currMonth).html(male1014)
+                jq("#exitedM15To19_"+currMonth).html(male1519)
+                jq("#exitedM20To24_"+currMonth).html(male2024)
+                jq("#exitedMabove24_"+currMonth).html(maleabove24)
                 
-                jq("#exitedF10To14").html(female1014)
-                jq("#exitedF15To19").html(female1519);
-                jq("#exitedF20To24").html(female2024)
-                jq("#exitedFabove24").html(femaleabove24)
+                jq("#exitedF10To14_"+currMonth).html(female1014)
+                jq("#exitedF15To19_"+currMonth).html(female1519);
+                jq("#exitedF20To24_"+currMonth).html(female2024)
+                jq("#exitedFabove24_"+currMonth).html(femaleabove24)
                 
                 var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#exitedTotal").html(total)
+                jq("#exitedTotal_"+currMonth).html(total)
                 
                 totalExited = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24)  ;
                 renderExitChart(totalExited, totalTransitioned, totalOptedOut);
@@ -1967,14 +1979,14 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 var datalengthCurAYPLIVF15To19 = filterf15to19.length;
                 var datalengthCurAYPLIVF20To24 = filterf20to24.length;
                 
-                jq("#AYPLHIVCurrentM10To14").html(datalengthCurAYPLIVM10To14)
-                jq("#AYPLHIVCurrentM15To19").html(datalengthCurAYPLIVM15To19)
-                jq("#AYPLHIVCurrentM20To24").html(datalengthCurAYPLIVM20To24)
+                jq("#AYPLHIVCurrentM10To14_"+currMonth).html(datalengthCurAYPLIVM10To14)
+                jq("#AYPLHIVCurrentM15To19_"+currMonth).html(datalengthCurAYPLIVM15To19)
+                jq("#AYPLHIVCurrentM20To24_"+currMonth).html(datalengthCurAYPLIVM20To24)
               
                 
-                jq("#AYPLHIVCurrentF10To14").html(datalengthCurAYPLIVF10To14)
-                jq("#AYPLHIVCurrentF15To19").html(datalengthCurAYPLIVF15To19);
-                jq("#AYPLHIVCurrentF20To24").html(datalengthCurAYPLIVF20To24)
+                jq("#AYPLHIVCurrentF10To14_"+currMonth).html(datalengthCurAYPLIVF10To14)
+                jq("#AYPLHIVCurrentF15To19_"+currMonth).html(datalengthCurAYPLIVF15To19);
+                jq("#AYPLHIVCurrentF20To24_"+currMonth).html(datalengthCurAYPLIVF20To24)
              
 
                 
@@ -1986,47 +1998,55 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
             console.log(newDateFromEnd);
             var monthYearStringg = monthsName[newDateFromEnd.getMonth()] + " " + newDateFromEnd.getFullYear();
             
-            jq("#monthYearrM10To14").html(monthYearStringg)
-            jq("#monthYearrM15To19").html(monthYearStringg)
-            jq("#monthYearrM20To24").html(monthYearStringg)
-            jq("#monthYearrF10To14").html(monthYearStringg)
-            jq("#monthYearrF15To19").html(monthYearStringg)
-            jq("#monthYearrF20To24").html(monthYearStringg)
+            jq("#monthYearrM10To14_"+currMonth).html(monthYearStringg)
+            jq("#monthYearrM15To19_"+currMonth).html(monthYearStringg)
+            jq("#monthYearrM20To24_"+currMonth).html(monthYearStringg)
+            jq("#monthYearrF10To14_"+currMonth).html(monthYearStringg)
+            jq("#monthYearrF15To19_"+currMonth).html(monthYearStringg)
+            jq("#monthYearrF20To24_"+currMonth).html(monthYearStringg)
             
-            jq("#facilityNameM10To14").html(data["Facility_Name"])
-            jq("#facilityNameM15To19").html(data["Facility_Name"])
-            jq("#facilityNameM20To24").html(data["Facility_Name"])
-            jq("#facilityNameF10To14").html(data["Facility_Name"])
-            jq("#facilityNameF15To19").html(data["Facility_Name"])
-            jq("#facilityNameF20To24").html(data["Facility_Name"])
+            jq("#facilityNameM10To14_"+currMonth).html(data["Facility_Name"])
+            jq("#facilityNameM15To19_"+currMonth).html(data["Facility_Name"])
+            jq("#facilityNameM20To24_"+currMonth).html(data["Facility_Name"])
+            jq("#facilityNameF10To14_"+currMonth).html(data["Facility_Name"])
+            jq("#facilityNameF15To19_"+currMonth).html(data["Facility_Name"])
+            jq("#facilityNameF20To24_"+currMonth).html(data["Facility_Name"])
             
-            jq("#facilityLGAM10To14").html(data["Facility_LGA"])
-            jq("#facilityLGAM15To19").html(data["Facility_LGA"])
-            jq("#facilityLGAM20To24").html(data["Facility_LGA"])
-            jq("#facilityLGAF10To14").html(data["Facility_LGA"])
-            jq("#facilityLGAF15To19").html(data["Facility_LGA"])
-            jq("#facilityLGAF20To24").html(data["Facility_LGA"])
+            jq("#facilityLGAM10To14_"+currMonth).html(data["Facility_LGA"])
+            jq("#facilityLGAM15To19_"+currMonth).html(data["Facility_LGA"])
+            jq("#facilityLGAM20To24_"+currMonth).html(data["Facility_LGA"])
+            jq("#facilityLGAF10To14_"+currMonth).html(data["Facility_LGA"])
+            jq("#facilityLGAF15To19_"+currMonth).html(data["Facility_LGA"])
+            jq("#facilityLGAF20To24_"+currMonth).html(data["Facility_LGA"])
             
-            jq("#facilityStateM10To14").html(data["Facility_State"])
-            jq("#facilityStateM15To19").html(data["Facility_State"])
-            jq("#facilityStateM20To24").html(data["Facility_State"])
-            jq("#facilityStateF10To14").html(data["Facility_State"])
-            jq("#facilityStateF15To19").html(data["Facility_State"])
-            jq("#facilityStateF20To24").html(data["Facility_State"])
+            jq("#facilityStateM10To14_"+currMonth).html(data["Facility_State"])
+            jq("#facilityStateM15To19_"+currMonth).html(data["Facility_State"])
+            jq("#facilityStateM20To24_"+currMonth).html(data["Facility_State"])
+            jq("#facilityStateF10To14_"+currMonth).html(data["Facility_State"])
+            jq("#facilityStateF15To19_"+currMonth).html(data["Facility_State"])
+            jq("#facilityStateF20To24_"+currMonth).html(data["Facility_State"])
             
-            jq("#parner_NameM10To14").html(data["Parner_Name"])
-            jq("#parner_NameM15To19").html(data["Parner_Name"])
-            jq("#parner_NameM20To24").html(data["Parner_Name"])
-            jq("#parner_NameF10To14").html(data["Parner_Name"])
-            jq("#parner_NameF15To19").html(data["Parner_Name"])
-            jq("#parner_NameF20To24").html(data["Parner_Name"])
+            console.log("parner_NameM10To14")
+            console.log("parner_NameM10To14_"+currMonth)
+            
+
+            jq("#parner_NameM10To14_"+currMonth).html(data["Parner_Name"])
+            jq("#parner_NameM15To19_"+currMonth).html(data["Parner_Name"])
+            jq("#parner_NameM20To24_"+currMonth).html(data["Parner_Name"])
+            jq("#parner_NameF10To14_"+currMonth).html(data["Parner_Name"])
+            jq("#parner_NameF15To19_"+currMonth).html(data["Parner_Name"])
+            jq("#parner_NameF20To24_"+currMonth).html(data["Parner_Name"])
             
             console.log(data);
            
            
             
                 //Export();
-                tableToCSV();
+                console.log("which loop is last?")
+                if(currMonth==formattedMonthLength){
+                    tableToCSV();
+                }
+                //tableToCSV();
                 return  myAjax({startDate:startDate, endDate:endDate, ageType:ageTyp}, '${ ui.actionLink("getTotalEligibleForMonthZeroVL") }');
             })
 

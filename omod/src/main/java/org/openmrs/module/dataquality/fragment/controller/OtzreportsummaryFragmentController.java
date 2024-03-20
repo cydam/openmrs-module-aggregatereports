@@ -40,7 +40,7 @@ public class OtzreportsummaryFragmentController {
 	
 	OTZDao otzDao = new OTZDao();
 	
-	public void controller(FragmentModel model, @SpringBean("userService") UserService service) {
+	public void controller(FragmentModel model, @SpringBean("userService") UserService service, HttpServletRequest request) {
 		
 		try {
 			
@@ -50,9 +50,11 @@ public class OtzreportsummaryFragmentController {
 			JSONObject obj = new JSONObject(FileUtils.readFileToString(f));
 			
 			model.addAttribute("otz_info", obj);*/
+			//int formattedMonthLength = Integer.parseInt(request.getParameter("formattedMonthLength"));
 			model.addAttribute("testing", "test");
 			model.addAttribute("title", "OTZ");
-			model.addAttribute("formattedMonthLength", 0);
+			model.addAttribute("formattedMonthLength", 3);
+			//model.addAttribute("formattedMonthLength", formattedMonthLength);
 			Database.initConnection();
 		}
 		catch (Exception e) {
