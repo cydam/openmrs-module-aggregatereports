@@ -51,12 +51,12 @@ public class OtzreportsummaryFragmentController {
 			
 			model.addAttribute("otz_info", obj);*/
 			if (request.getParameter("formattedMonthLength") != null) {
-                               int formattedMonthLength = Integer.parseInt(request.getParameter("formattedMonthLength"));
-                               model.addAttribute("formattedMonthLength", formattedMonthLength);
-                       } else {
-                               // Code to handle the case when formattedMonthLength is not defined
-                               model.addAttribute("formattedMonthLength", 0);
-                       }
+				int formattedMonthLength = Integer.parseInt(request.getParameter("formattedMonthLength"));
+				model.addAttribute("formattedMonthLength", formattedMonthLength);
+			} else {
+				// Code to handle the case when formattedMonthLength is not defined
+				model.addAttribute("formattedMonthLength", 0);
+			}
 			model.addAttribute("testing", "test");
 			model.addAttribute("title", "OTZ");
 			model.addAttribute("formattedMonthLength", 3);
