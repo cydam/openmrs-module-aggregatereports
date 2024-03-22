@@ -50,12 +50,18 @@ public class OtzreportsummaryFragmentController {
 			JSONObject obj = new JSONObject(FileUtils.readFileToString(f));
 			
 			model.addAttribute("otz_info", obj);*/
-			//int formattedMonthLength = Integer.parseInt(request.getParameter("formattedMonthLength"));
+			if (request.getParameter("formattedMonthLength") != null) {
+                               int formattedMonthLength = Integer.parseInt(request.getParameter("formattedMonthLength"));
+                               model.addAttribute("formattedMonthLength", formattedMonthLength);
+                       } else {
+                               // Code to handle the case when formattedMonthLength is not defined
+                               model.addAttribute("formattedMonthLength", 0);
+                       }
 			model.addAttribute("testing", "test");
 			model.addAttribute("title", "OTZ");
 			model.addAttribute("formattedMonthLength", 3);
 			//model.addAttribute("formattedMonthLength", formattedMonthLength);
-			Database.initConnection();
+			//Database.initConnection();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
