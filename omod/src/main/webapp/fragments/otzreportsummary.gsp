@@ -210,7 +210,7 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
     
     <br/>
     
-    <div style="display: none">
+    <div style="display: block">
         <div id="OTZReport" style="display: block">OTZ Report</div>
     </div>
       
@@ -296,6 +296,7 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
       console.log(formattedMonthLength)
       console.log("from groovy")
       console.log(${formattedMonthLength})
+      var initialDate = "";
       var indicatorDescription = {};
       jq(document).ready(function(e){
       
@@ -472,6 +473,8 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
             /////////////////////////////////////////////////here we go/////////////////////////////////////////////////
             const beginDate = new Date(startDate);
             const finishDate = new Date(endDate);
+            console.log("beginDate: "+beginDate);
+            console.log("finishDate: "+finishDate);
 
 
 
@@ -572,6 +575,8 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
 
             console.log("button click")
             // Initialize the HTML content variable
+            
+            let newContent3 =``;
             let newContent = `
     <div class="container">
     <table id="tab2export" class="table dataTable">
@@ -635,6 +640,96 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
             
         </thead>
         <tbody>`;
+
+
+
+
+            function calculateDates(startDateTime, jsgroovar) {
+    const today = new Date();
+  
+    const monthsBetweenDates = Math.floor((today - startDateTime) / (1000 * 60 * 60 * 24 * 30));
+    console.log("monthsBetweenDates", monthsBetweenDates);
+  
+    for (let jf = 12;; jf += 6) {
+        console.log("month:", jf);
+        let newContent2 =``;
+    
+        for (let agecccccc = 0; agecccccc<6; agecccccc++){
+
+            const rowContent = `
+        <tr>
+            <td class="loadingView num4"  id="parner_NameF20To24_" style="background-color: gray;"></td>
+            <td class="loadingView num4"  id="facilityStateF20To24_" style="background-color: gray;"></td>
+            <td class="loadingView num4"  id="facilityLGAF20To24_" style="background-color: gray;"></td>
+            <td class="loadingView num4"  id="facilityNameF20To24_" style="background-color: gray;"></td>
+            <td class="loadingView num4"  id="monthYearrF20To24_" style="background-color: gray;"></td>
+            <td  style="text-align:center" align="middle" style="background-color: gray;">Female</td>
+            <td  style="text-align:center" align="middle" style="background-color: gray;">20-24 yrs</td>
+            <td class="loadingView num4"  id="AYPLHIVCurrentF20To24_" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="totalEnrolledF20To24_" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="totalEnrolledWithApp6MtPriorF20To24_" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="totalEnrolledKeptAppPriorF20To24_" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="totalEnrolledGoodAdhPriorF20To24_" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="totalEnrolledBaselineResultF20To24_" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="totalEnrolledBaselineResultBelow200F20To24_" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="totalEnrolledBaselineResult200To1000F20To24_" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="totalEnrolledBaselineResultAbove1000F20To24_" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="totalEnrolledBaselineResult6MtF20To24_" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="totalEnrolledBaselineResult6MtBelow200F20To24_" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="totalEnrolledBaselineResult6MtBt200To1000F20To24_" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="totalEnrolledBaselineResult6MtBelow1000Gt1000F20To24_" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="totalEnrolledEligibleMtZF20To24_" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="totalEnrolledEligibleMtZSampleF20To24_" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="totalEnrolledB1000MZ200F20To24_" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="totalEnrolledB1000MZ200To1000F20To24_" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="totalEnrolledB1000MZ1000F20To24_" style="background-color: gray;">-</td>
+            
+            <td class="loadingView num4"  id="followwup">month \${jf}</td>
+            <td class="loadingView num4"  id="scheduledPickupFUM10To14_\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="scheduledKeptPickupFUM10To14_\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="goodAdhFUM10To14_\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="eligibleFUM10To14_\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="samplesTakenM10To14_\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="samplesTakenResultM10To14_\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="samplesTakenResult200M10To14_\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="samplesTakenResult200To1000M10To14_\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="samplesTakenResult1000M10To14_\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="resultPast12MtM10To14_\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="resultPast12Mt200M10To14_\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="resultPast12Mt200To100M10To14_\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="resultPast12Mt1000M10To14_\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="resultPast12Mt1000EACM10To14_\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="resultPast12Mt1000RepeatM10To14_\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="resultPast12Mt1000Repeat200M10To14_\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="resultPast12Mt1000Repeat200To1000M10To14_\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="resultPast12Mt1000Repeat1000M10To14_\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="switchTo2ndM10To14_\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="switchTo3rdM10To14_\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="completed7M10To14_\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="transferredOutM10To14_\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="ltfuM10To14_\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="deadM10To14_\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="optedOutM10To14_\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="transitionedM10To14_\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="exitedM10To14_\${jsgroovar}month\${jf}">-</td>
+        </tr>
+        `;
+
+        newContent2 += rowContent;
+
+        }
+        
+        newContent += newContent2;
+
+        // To include the current month block
+        if (jf > monthsBetweenDates) {
+          break;
+        }
+      }
+  }
+  
+
+
 
 for (let jsgroovar = 1; jsgroovar <= formattedMonthLength; jsgroovar++) {
     newContent += `
@@ -970,9 +1065,16 @@ for (let jsgroovar = 1; jsgroovar <= formattedMonthLength; jsgroovar++) {
                 <td class="loadingView num4"  id="exitedF20To24_\${jsgroovar}">-</td>
             </tr>
     `;
+
+
+
+
+  const startD = new Date(monthsData[jsgroovar - 1].startDate);
+  calculateDates(startD, jsgroovar);
+
 }
 
-newContent += `
+newContent3 = `
             
             <tr>
                 <td class="loadingView num4"  id="parner_NameF20To24ended">ended</td>
@@ -1036,7 +1138,7 @@ newContent += `
 
 
             // Set the new content to the #OTZReport div
-            document.getElementById("OTZReport").innerHTML = newContent;
+            document.getElementById("OTZReport").innerHTML = newContent + newContent3;
             
                 
                 //return
@@ -1049,13 +1151,18 @@ newContent += `
 
             /////////////////////////////////////////////////here we go/////////////////////////////////////////////////
             console.log("for loop log")
+            console.log(callgetFormattedMonthsData)
             callgetFormattedMonthsData.forEach(function(item) {
+                if (item.month==1){
+                    initialDate = item.startDate;
+                }
                 console.log("what date here")
                 console.log(item.month);
                 startDate = item.startDate;
                 endDate = item.endDate;
                 console.log(startDate);
                 console.log(endDate);
+                console.log(initialDate);
                 getOTZData(item);
             });
 
