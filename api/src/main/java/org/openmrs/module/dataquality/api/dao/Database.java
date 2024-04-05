@@ -94,9 +94,24 @@ public class Database {
 		}
 	}
 	
-	public static void cleanUp(ResultSet rs, Statement stmt, Connection con) {
+	/*public static void cleanUp(ResultSet rs, Statement stmt, Connection con) {
 		try {
 			Database.connectionPool.free(con);
+			stmt.close();
+			if (rs != null)
+				rs.close();
+			
+		}
+		catch (Exception ex) {
+			handleException(ex);
+		}
+	}*/
+	
+	public static void cleanUp(ResultSet rs, Statement stmt, Connection con) {
+		try {
+			if (con != null) {
+				con.close();
+			}
 			stmt.close();
 			if (rs != null)
 				rs.close();

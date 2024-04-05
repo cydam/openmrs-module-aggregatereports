@@ -18,6 +18,8 @@ import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.openmrs.module.dataquality.util.DBConnection;
+import org.openmrs.module.dataquality.util.Utils;
 
 /**
  * @author lordmaul
@@ -54,9 +56,15 @@ public class ConnectionPool implements Runnable {
 		dataSource = new HikariDataSource(config);
 	}
 	
-	public synchronized Connection getConnection() throws SQLException {
+	/*public synchronized Connection getConnection() throws SQLException {
 		return dataSource.getConnection();
 		
+	}*/
+	
+	public Connection getConnection() throws SQLException {
+		DBConnection openmrsConn = Utils.getNmrsConnectionDetails();
+		
+		return DriverManager.getConnection(openmrsConn.getUrl(), openmrsConn.getUsername(), openmrsConn.getPassword());
 	}
 	
 	@Override
