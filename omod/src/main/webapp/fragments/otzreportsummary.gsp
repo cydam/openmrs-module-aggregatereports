@@ -656,62 +656,71 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
     
         for (let agecccccc = 0; agecccccc<6; agecccccc++){
 
+            let ageBand = agecccccc === 0 ? "M10To14_" :
+                                agecccccc === 1 ? "M15To19_" :
+                                agecccccc === 2 ? "M20To24_" :
+                                agecccccc === 3 ? "F10To14_" :
+                                agecccccc === 4 ? "F15To19_" :
+                                "F20To24_";
+            let var2 = ageBand.startsWith("M") ? "Male" : "Female";
+            let var3 = ageBand.substring(1, ageBand.indexOf("T")) + "-" + ageBand.substring(ageBand.indexOf("o") + 1, ageBand.indexOf("_"));
+
             const rowContent = `
         <tr>
-            <td class="loadingView num4"  id="parner_NameF20To24_" style="background-color: gray;"></td>
-            <td class="loadingView num4"  id="facilityStateF20To24_" style="background-color: gray;"></td>
-            <td class="loadingView num4"  id="facilityLGAF20To24_" style="background-color: gray;"></td>
-            <td class="loadingView num4"  id="facilityNameF20To24_" style="background-color: gray;"></td>
-            <td class="loadingView num4"  id="monthYearrF20To24_" style="background-color: gray;"></td>
-            <td  style="text-align:center" align="middle" style="background-color: gray;">Female</td>
-            <td  style="text-align:center" align="middle" style="background-color: gray;">20-24 yrs</td>
-            <td class="loadingView num4"  id="AYPLHIVCurrentF20To24_" style="background-color: gray;">-</td>
-            <td class="loadingView num4"  id="totalEnrolledF20To24_" style="background-color: gray;">-</td>
-            <td class="loadingView num4"  id="totalEnrolledWithApp6MtPriorF20To24_" style="background-color: gray;">-</td>
-            <td class="loadingView num4"  id="totalEnrolledKeptAppPriorF20To24_" style="background-color: gray;">-</td>
-            <td class="loadingView num4"  id="totalEnrolledGoodAdhPriorF20To24_" style="background-color: gray;">-</td>
-            <td class="loadingView num4"  id="totalEnrolledBaselineResultF20To24_" style="background-color: gray;">-</td>
-            <td class="loadingView num4"  id="totalEnrolledBaselineResultBelow200F20To24_" style="background-color: gray;">-</td>
-            <td class="loadingView num4"  id="totalEnrolledBaselineResult200To1000F20To24_" style="background-color: gray;">-</td>
-            <td class="loadingView num4"  id="totalEnrolledBaselineResultAbove1000F20To24_" style="background-color: gray;">-</td>
-            <td class="loadingView num4"  id="totalEnrolledBaselineResult6MtF20To24_" style="background-color: gray;">-</td>
-            <td class="loadingView num4"  id="totalEnrolledBaselineResult6MtBelow200F20To24_" style="background-color: gray;">-</td>
-            <td class="loadingView num4"  id="totalEnrolledBaselineResult6MtBt200To1000F20To24_" style="background-color: gray;">-</td>
-            <td class="loadingView num4"  id="totalEnrolledBaselineResult6MtBelow1000Gt1000F20To24_" style="background-color: gray;">-</td>
-            <td class="loadingView num4"  id="totalEnrolledEligibleMtZF20To24_" style="background-color: gray;">-</td>
-            <td class="loadingView num4"  id="totalEnrolledEligibleMtZSampleF20To24_" style="background-color: gray;">-</td>
-            <td class="loadingView num4"  id="totalEnrolledB1000MZ200F20To24_" style="background-color: gray;">-</td>
-            <td class="loadingView num4"  id="totalEnrolledB1000MZ200To1000F20To24_" style="background-color: gray;">-</td>
-            <td class="loadingView num4"  id="totalEnrolledB1000MZ1000F20To24_" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="parner_Name\${ageBand}\${jsgroovar}"></td>
+            <td class="loadingView num4"  id="facilityState\${ageBand}\${jsgroovar}"></td>
+            <td class="loadingView num4"  id="facilityLGA\${ageBand}\${jsgroovar}"></td>
+            <td class="loadingView num4"  id="facilityName\${ageBand}\${jsgroovar}"></td>
+            <td class="loadingView num4"  id="monthYearr\${ageBand}\${jsgroovar}"></td>
+            <td  style="text-align:center" align="middle">\${var2}</td>
+            <td  style="text-align:center" align="middle">\${var3} yrs</td>
+            <td class="loadingView num4"  id="AYPLHIVCurrent\${ageBand}\${jsgroovar}" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="totalEnrolled\${ageBand}\${jsgroovar}" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="totalEnrolledWithApp6MtPrior\${ageBand}\${jsgroovar}" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="totalEnrolledKeptAppPrior\${ageBand}\${jsgroovar}" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="totalEnrolledGoodAdhPrior\${ageBand}\${jsgroovar}" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="totalEnrolledBaselineResult\${ageBand}\${jsgroovar}" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="totalEnrolledBaselineResultBelow200\${ageBand}\${jsgroovar}" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="totalEnrolledBaselineResult200To1000\${ageBand}\${jsgroovar}" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="totalEnrolledBaselineResultAbove1000\${ageBand}\${jsgroovar}" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="totalEnrolledBaselineResult6Mt\${ageBand}\${jsgroovar}" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="totalEnrolledBaselineResult6MtBelow200\${ageBand}\${jsgroovar}" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="totalEnrolledBaselineResult6MtBt200To1000\${ageBand}\${jsgroovar}" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="totalEnrolledBaselineResult6MtBelow1000Gt1000\${ageBand}\${jsgroovar}" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="totalEnrolledEligibleMtZ\${ageBand}\${jsgroovar}" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="totalEnrolledEligibleMtZSample\${ageBand}\${jsgroovar}" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="totalEnrolledB1000MZ200\${ageBand}\${jsgroovar}" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="totalEnrolledB1000MZ200To1000\${ageBand}\${jsgroovar}" style="background-color: gray;">-</td>
+            <td class="loadingView num4"  id="totalEnrolledB1000MZ1000\${ageBand}\${jsgroovar}" style="background-color: gray;">-</td>
             
             <td class="loadingView num4"  id="followwup">month \${jf}</td>
-            <td class="loadingView num4"  id="scheduledPickupFUM10To14_\${jsgroovar}month\${jf}">-</td>
-            <td class="loadingView num4"  id="scheduledKeptPickupFUM10To14_\${jsgroovar}month\${jf}">-</td>
-            <td class="loadingView num4"  id="goodAdhFUM10To14_\${jsgroovar}month\${jf}">-</td>
-            <td class="loadingView num4"  id="eligibleFUM10To14_\${jsgroovar}month\${jf}">-</td>
-            <td class="loadingView num4"  id="samplesTakenM10To14_\${jsgroovar}month\${jf}">-</td>
-            <td class="loadingView num4"  id="samplesTakenResultM10To14_\${jsgroovar}month\${jf}">-</td>
-            <td class="loadingView num4"  id="samplesTakenResult200M10To14_\${jsgroovar}month\${jf}">-</td>
-            <td class="loadingView num4"  id="samplesTakenResult200To1000M10To14_\${jsgroovar}month\${jf}">-</td>
-            <td class="loadingView num4"  id="samplesTakenResult1000M10To14_\${jsgroovar}month\${jf}">-</td>
-            <td class="loadingView num4"  id="resultPast12MtM10To14_\${jsgroovar}month\${jf}">-</td>
-            <td class="loadingView num4"  id="resultPast12Mt200M10To14_\${jsgroovar}month\${jf}">-</td>
-            <td class="loadingView num4"  id="resultPast12Mt200To100M10To14_\${jsgroovar}month\${jf}">-</td>
-            <td class="loadingView num4"  id="resultPast12Mt1000M10To14_\${jsgroovar}month\${jf}">-</td>
-            <td class="loadingView num4"  id="resultPast12Mt1000EACM10To14_\${jsgroovar}month\${jf}">-</td>
-            <td class="loadingView num4"  id="resultPast12Mt1000RepeatM10To14_\${jsgroovar}month\${jf}">-</td>
-            <td class="loadingView num4"  id="resultPast12Mt1000Repeat200M10To14_\${jsgroovar}month\${jf}">-</td>
-            <td class="loadingView num4"  id="resultPast12Mt1000Repeat200To1000M10To14_\${jsgroovar}month\${jf}">-</td>
-            <td class="loadingView num4"  id="resultPast12Mt1000Repeat1000M10To14_\${jsgroovar}month\${jf}">-</td>
-            <td class="loadingView num4"  id="switchTo2ndM10To14_\${jsgroovar}month\${jf}">-</td>
-            <td class="loadingView num4"  id="switchTo3rdM10To14_\${jsgroovar}month\${jf}">-</td>
-            <td class="loadingView num4"  id="completed7M10To14_\${jsgroovar}month\${jf}">-</td>
-            <td class="loadingView num4"  id="transferredOutM10To14_\${jsgroovar}month\${jf}">-</td>
-            <td class="loadingView num4"  id="ltfuM10To14_\${jsgroovar}month\${jf}">-</td>
-            <td class="loadingView num4"  id="deadM10To14_\${jsgroovar}month\${jf}">-</td>
-            <td class="loadingView num4"  id="optedOutM10To14_\${jsgroovar}month\${jf}">-</td>
-            <td class="loadingView num4"  id="transitionedM10To14_\${jsgroovar}month\${jf}">-</td>
-            <td class="loadingView num4"  id="exitedM10To14_\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="scheduledPickupFU\${ageBand}\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="scheduledKeptPickupFU\${ageBand}\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="goodAdhFU\${ageBand}\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="eligibleFU\${ageBand}\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="samplesTaken\${ageBand}\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="samplesTakenResult\${ageBand}\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="samplesTakenResult200\${ageBand}\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="samplesTakenResult200To1000\${ageBand}\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="samplesTakenResult1000\${ageBand}\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="resultPast12Mt\${ageBand}\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="resultPast12Mt200\${ageBand}\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="resultPast12Mt200To100\${ageBand}\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="resultPast12Mt1000\${ageBand}\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="resultPast12Mt1000EAC\${ageBand}\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="resultPast12Mt1000Repeat\${ageBand}\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="resultPast12Mt1000Repeat200\${ageBand}\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="resultPast12Mt1000Repeat200To1000\${ageBand}\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="resultPast12Mt1000Repeat1000\${ageBand}\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="switchTo2nd\${ageBand}\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="switchTo3rd\${ageBand}\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="completed7\${ageBand}\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="transferredOut\${ageBand}\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="ltfu\${ageBand}\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="dead\${ageBand}\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="optedOut\${ageBand}\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="transitioned\${ageBand}\${jsgroovar}month\${jf}">-</td>
+            <td class="loadingView num4"  id="exited\${ageBand}\${jsgroovar}month\${jf}">-</td>
         </tr>
         `;
 
@@ -759,34 +768,35 @@ for (let jsgroovar = 1; jsgroovar <= formattedMonthLength; jsgroovar++) {
                 <td class="loadingView num4"  id="totalEnrolledB1000MZ200M10To14_\${jsgroovar}">-</td>
                 <td class="loadingView num4"  id="totalEnrolledB1000MZ200To1000M10To14_\${jsgroovar}">-</td>
                 <td class="loadingView num4"  id="totalEnrolledB1000MZ1000M10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="followwup">Follow up</td>
-                <td class="loadingView num4"  id="scheduledPickupFUM10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="scheduledKeptPickupFUM10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="goodAdhFUM10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="eligibleFUM10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="samplesTakenM10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="samplesTakenResultM10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="samplesTakenResult200M10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="samplesTakenResult200To1000M10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="samplesTakenResult1000M10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12MtM10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt200M10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt200To100M10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000M10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000EACM10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000RepeatM10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000Repeat200M10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000Repeat200To1000M10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000Repeat1000M10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="switchTo2ndM10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="switchTo3rdM10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="completed7M10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="transferredOutM10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="ltfuM10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="deadM10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="optedOutM10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="transitionedM10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="exitedM10To14_\${jsgroovar}">-</td>
+
+                <td class="loadingView num4"  id="followwup">month 6</td>
+                <td class="loadingView num4"  id="scheduledPickupFUM10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="scheduledKeptPickupFUM10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="goodAdhFUM10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="eligibleFUM10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="samplesTakenM10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="samplesTakenResultM10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="samplesTakenResult200M10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="samplesTakenResult200To1000M10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="samplesTakenResult1000M10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12MtM10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt200M10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt200To100M10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000M10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000EACM10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000RepeatM10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000Repeat200M10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000Repeat200To1000M10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000Repeat1000M10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="switchTo2ndM10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="switchTo3rdM10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="completed7M10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="transferredOutM10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="ltfuM10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="deadM10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="optedOutM10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="transitionedM10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="exitedM10To14_\${jsgroovar}month6">-</td>
             </tr>
             <tr>
                 <td class="loadingView num4"  id="parner_NameM15To19_\${jsgroovar}"></td>
@@ -814,34 +824,35 @@ for (let jsgroovar = 1; jsgroovar <= formattedMonthLength; jsgroovar++) {
                 <td class="loadingView num4"  id="totalEnrolledB1000MZ200M15To19_\${jsgroovar}">-</td>
                 <td class="loadingView num4"  id="totalEnrolledB1000MZ200To1000M15To19_\${jsgroovar}">-</td>
                 <td class="loadingView num4"  id="totalEnrolledB1000MZ1000M15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="followwup">Follow up</td>
-                <td class="loadingView num4"  id="scheduledPickupFUM15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="scheduledKeptPickupFUM15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="goodAdhFUM15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="eligibleFUM15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="samplesTakenM15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="samplesTakenResultM15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="samplesTakenResult200M15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="samplesTakenResult200To1000M15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="samplesTakenResult1000M15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12MtM15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt200M15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt200To100M15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000M15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000EACM15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000RepeatM15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000Repeat200M15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000Repeat200To1000M15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000Repeat1000M15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="switchTo2ndM15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="switchTo3rdM15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="completed7M15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="transferredOutM15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="ltfuM15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="deadM15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="optedOutM15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="transitionedM15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="exitedM15To19_\${jsgroovar}">-</td>
+
+                <td class="loadingView num4"  id="followwup">month 6</td>
+                <td class="loadingView num4"  id="scheduledPickupFUM15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="scheduledKeptPickupFUM15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="goodAdhFUM15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="eligibleFUM15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="samplesTakenM15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="samplesTakenResultM15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="samplesTakenResult200M15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="samplesTakenResult200To1000M15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="samplesTakenResult1000M15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12MtM15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt200M15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt200To100M15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000M15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000EACM15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000RepeatM15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000Repeat200M15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000Repeat200To1000M15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000Repeat1000M15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="switchTo2ndM15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="switchTo3rdM15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="completed7M15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="transferredOutM15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="ltfuM15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="deadM15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="optedOutM15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="transitionedM15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="exitedM15To19_\${jsgroovar}month6">-</td>
             </tr>
             <tr>
                 <td class="loadingView num4"  id="parner_NameM20To24_\${jsgroovar}"></td>
@@ -869,34 +880,35 @@ for (let jsgroovar = 1; jsgroovar <= formattedMonthLength; jsgroovar++) {
                 <td class="loadingView num4"  id="totalEnrolledB1000MZ200M20To24_\${jsgroovar}">-</td>
                 <td class="loadingView num4"  id="totalEnrolledB1000MZ200To1000M20To24_\${jsgroovar}">-</td>
                 <td class="loadingView num4"  id="totalEnrolledB1000MZ1000M20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="followwup">Follow up</td>
-                <td class="loadingView num4"  id="scheduledPickupFUM20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="scheduledKeptPickupFUM20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="goodAdhFUM20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="eligibleFUM20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="samplesTakenM20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="samplesTakenResultM20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="samplesTakenResult200M20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="samplesTakenResult200To1000M20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="samplesTakenResult1000M20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12MtM20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt200M20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt200To100M20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000M20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000EACM20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000RepeatM20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000Repeat200M20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000Repeat200To1000M20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000Repeat1000M20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="switchTo2ndM20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="switchTo3rdM20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="completed7M20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="transferredOutM20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="ltfuM20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="deadM20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="optedOutM20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="transitionedM20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="exitedM20To24_\${jsgroovar}">-</td>
+
+                <td class="loadingView num4"  id="followwup">month 6</td>
+                <td class="loadingView num4"  id="scheduledPickupFUM20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="scheduledKeptPickupFUM20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="goodAdhFUM20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="eligibleFUM20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="samplesTakenM20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="samplesTakenResultM20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="samplesTakenResult200M20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="samplesTakenResult200To1000M20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="samplesTakenResult1000M20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12MtM20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt200M20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt200To100M20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000M20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000EACM20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000RepeatM20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000Repeat200M20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000Repeat200To1000M20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000Repeat1000M20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="switchTo2ndM20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="switchTo3rdM20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="completed7M20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="transferredOutM20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="ltfuM20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="deadM20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="optedOutM20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="transitionedM20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="exitedM20To24_\${jsgroovar}month6">-</td>
             </tr>
             
             <tr>
@@ -925,34 +937,35 @@ for (let jsgroovar = 1; jsgroovar <= formattedMonthLength; jsgroovar++) {
                 <td class="loadingView num4"  id="totalEnrolledB1000MZ200F10To14_\${jsgroovar}">-</td>
                 <td class="loadingView num4"  id="totalEnrolledB1000MZ200To1000F10To14_\${jsgroovar}">-</td>
                 <td class="loadingView num4"  id="totalEnrolledB1000MZ1000F10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="followwup">Follow up</td>
-                <td class="loadingView num4"  id="scheduledPickupFUF10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="scheduledKeptPickupFUF10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="goodAdhFUF10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="eligibleFUF10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="samplesTakenF10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="samplesTakenResultF10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="samplesTakenResult200F10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="samplesTakenResult200To1000F10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="samplesTakenResult1000F10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12MtF10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt200F10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt200To100F10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000F10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000EACF10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000RepeatF10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000Repeat200F10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000Repeat200To1000F10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000Repeat1000F10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="switchTo2ndF10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="switchTo3rdF10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="completed7F10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="transferredOutF10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="ltfuF10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="deadF10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="optedOutF10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="transitionedF10To14_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="exitedF10To14_\${jsgroovar}">-</td>
+
+                <td class="loadingView num4"  id="followwup">month 6</td>
+                <td class="loadingView num4"  id="scheduledPickupFUF10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="scheduledKeptPickupFUF10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="goodAdhFUF10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="eligibleFUF10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="samplesTakenF10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="samplesTakenResultF10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="samplesTakenResult200F10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="samplesTakenResult200To1000F10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="samplesTakenResult1000F10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12MtF10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt200F10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt200To100F10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000F10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000EACF10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000RepeatF10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000Repeat200F10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000Repeat200To1000F10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000Repeat1000F10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="switchTo2ndF10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="switchTo3rdF10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="completed7F10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="transferredOutF10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="ltfuF10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="deadF10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="optedOutF10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="transitionedF10To14_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="exitedF10To14_\${jsgroovar}month6">-</td>
             </tr>
             <tr>
                 <td class="loadingView num4"  id="parner_NameF15To19_\${jsgroovar}"></td>
@@ -980,34 +993,35 @@ for (let jsgroovar = 1; jsgroovar <= formattedMonthLength; jsgroovar++) {
                 <td class="loadingView num4"  id="totalEnrolledB1000MZ200F15To19_\${jsgroovar}">-</td>
                 <td class="loadingView num4"  id="totalEnrolledB1000MZ200To1000F15To19_\${jsgroovar}">-</td>
                 <td class="loadingView num4"  id="totalEnrolledB1000MZ1000F15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="followwup">Follow up</td>
-                <td class="loadingView num4"  id="scheduledPickupFUF15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="scheduledKeptPickupFUF15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="goodAdhFUF15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="eligibleFUF15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="samplesTakenF15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="samplesTakenResultF15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="samplesTakenResult200F15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="samplesTakenResult200To1000F15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="samplesTakenResult1000F15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12MtF15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt200F15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt200To100F15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000F15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000EACF15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000RepeatF15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000Repeat200F15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000Repeat200To1000F15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000Repeat1000F15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="switchTo2ndF15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="switchTo3rdF15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="completed7F15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="transferredOutF15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="ltfuF15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="deadF15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="optedOutF15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="transitionedF15To19_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="exitedF15To19_\${jsgroovar}">-</td>
+
+                <td class="loadingView num4"  id="followwup">month 6</td>
+                <td class="loadingView num4"  id="scheduledPickupFUF15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="scheduledKeptPickupFUF15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="goodAdhFUF15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="eligibleFUF15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="samplesTakenF15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="samplesTakenResultF15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="samplesTakenResult200F15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="samplesTakenResult200To1000F15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="samplesTakenResult1000F15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12MtF15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt200F15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt200To100F15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000F15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000EACF15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000RepeatF15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000Repeat200F15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000Repeat200To1000F15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000Repeat1000F15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="switchTo2ndF15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="switchTo3rdF15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="completed7F15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="transferredOutF15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="ltfuF15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="deadF15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="optedOutF15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="transitionedF15To19_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="exitedF15To19_\${jsgroovar}month6">-</td>
             </tr>
             <tr>
                 <td class="loadingView num4"  id="parner_NameF20To24_\${jsgroovar}"></td>
@@ -1035,34 +1049,35 @@ for (let jsgroovar = 1; jsgroovar <= formattedMonthLength; jsgroovar++) {
                 <td class="loadingView num4"  id="totalEnrolledB1000MZ200F20To24_\${jsgroovar}">-</td>
                 <td class="loadingView num4"  id="totalEnrolledB1000MZ200To1000F20To24_\${jsgroovar}">-</td>
                 <td class="loadingView num4"  id="totalEnrolledB1000MZ1000F20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="followwup">Follow up</td>
-                <td class="loadingView num4"  id="scheduledPickupFUF20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="scheduledKeptPickupFUF20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="goodAdhFUF20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="eligibleFUF20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="samplesTakenF20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="samplesTakenResultF20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="samplesTakenResult200F20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="samplesTakenResult200To1000F20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="samplesTakenResult1000F20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12MtF20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt200F20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt200To100F20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000F20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000EACF20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000RepeatF20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000Repeat200F20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000Repeat200To1000F20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="resultPast12Mt1000Repeat1000F20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="switchTo2ndF20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="switchTo3rdF20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="completed7F20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="transferredOutF20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="ltfuF20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="deadF20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="optedOutF20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="transitionedF20To24_\${jsgroovar}">-</td>
-                <td class="loadingView num4"  id="exitedF20To24_\${jsgroovar}">-</td>
+
+                <td class="loadingView num4"  id="followwup">month 6</td>
+                <td class="loadingView num4"  id="scheduledPickupFUF20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="scheduledKeptPickupFUF20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="goodAdhFUF20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="eligibleFUF20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="samplesTakenF20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="samplesTakenResultF20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="samplesTakenResult200F20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="samplesTakenResult200To1000F20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="samplesTakenResult1000F20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12MtF20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt200F20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt200To100F20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000F20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000EACF20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000RepeatF20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000Repeat200F20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000Repeat200To1000F20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="resultPast12Mt1000Repeat1000F20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="switchTo2ndF20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="switchTo3rdF20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="completed7F20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="transferredOutF20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="ltfuF20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="deadF20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="optedOutF20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="transitionedF20To24_\${jsgroovar}month6">-</td>
+                <td class="loadingView num4"  id="exitedF20To24_\${jsgroovar}month6">-</td>
             </tr>
     `;
 
