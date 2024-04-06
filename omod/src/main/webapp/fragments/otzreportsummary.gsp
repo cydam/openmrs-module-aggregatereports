@@ -2628,6 +2628,9 @@ newContent3 = `
             
             var monthYearStringg = monthsName[newDateFromStart.getMonth()] + " " + newDateFromStart.getFullYear();
             
+           
+            jq(`[id^="monthYearr"]`).html(monthYearStringg)
+
             jq("#monthYearrM10To14_"+currMonth).html(monthYearStringg)
             jq("#monthYearrM15To19_"+currMonth).html(monthYearStringg)
             jq("#monthYearrM20To24_"+currMonth).html(monthYearStringg)
@@ -2635,6 +2638,8 @@ newContent3 = `
             jq("#monthYearrF15To19_"+currMonth).html(monthYearStringg)
             jq("#monthYearrF20To24_"+currMonth).html(monthYearStringg)
             
+            jq(`[id^="facilityName"]`).html(data["Facility_Name"])
+
             jq("#facilityNameM10To14_"+currMonth).html(data["Facility_Name"])
             jq("#facilityNameM15To19_"+currMonth).html(data["Facility_Name"])
             jq("#facilityNameM20To24_"+currMonth).html(data["Facility_Name"])
@@ -2642,6 +2647,8 @@ newContent3 = `
             jq("#facilityNameF15To19_"+currMonth).html(data["Facility_Name"])
             jq("#facilityNameF20To24_"+currMonth).html(data["Facility_Name"])
             
+            jq(`[id^="facilityLGA"]`).html(data["Facility_LGA"])
+
             jq("#facilityLGAM10To14_"+currMonth).html(data["Facility_LGA"])
             jq("#facilityLGAM15To19_"+currMonth).html(data["Facility_LGA"])
             jq("#facilityLGAM20To24_"+currMonth).html(data["Facility_LGA"])
@@ -2649,6 +2656,8 @@ newContent3 = `
             jq("#facilityLGAF15To19_"+currMonth).html(data["Facility_LGA"])
             jq("#facilityLGAF20To24_"+currMonth).html(data["Facility_LGA"])
             
+            jq(`[id^="facilityState"]`).html(data["Facility_State"])
+
             jq("#facilityStateM10To14_"+currMonth).html(data["Facility_State"])
             jq("#facilityStateM15To19_"+currMonth).html(data["Facility_State"])
             jq("#facilityStateM20To24_"+currMonth).html(data["Facility_State"])
@@ -2656,7 +2665,7 @@ newContent3 = `
             jq("#facilityStateF15To19_"+currMonth).html(data["Facility_State"])
             jq("#facilityStateF20To24_"+currMonth).html(data["Facility_State"])
 
-            
+            jq(`[id^="parner_Name"]`).html(data["Parner_Name"])
 
             jq("#parner_NameM10To14_"+currMonth).html(data["Parner_Name"])
             jq("#parner_NameM15To19_"+currMonth).html(data["Parner_Name"])
