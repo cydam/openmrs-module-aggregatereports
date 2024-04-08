@@ -1092,10 +1092,10 @@ for (let jsgroovar = 1; jsgroovar <= formattedMonthLength; jsgroovar++) {
 newContent3 = `
             
             <tr>
-                <td class="loadingView num4"  id="parner_NameF20To24ended">ended</td>
-                <td class="loadingView num4"  id="facilityStateF20To24"></td>
-                <td class="loadingView num4"  id="facilityLGAF20To24"></td>
-                <td class="loadingView num4"  id="facilityNameF20To24"></td>
+                <td class="loadingView num4"  id="parner_ended_NameF20To24ended">ended</td>
+                <td class="loadingView num4"  id="facility_ended_StateF20To24"></td>
+                <td class="loadingView num4"  id="facility_ended_LGAF20To24"></td>
+                <td class="loadingView num4"  id="facility_ended_NameF20To24"></td>
                 <td class="loadingView num4"  id="monthYearrF20To24"></td>
                 <td  style="text-align:center" align="middle_">Female</td>
                 <td  style="text-align:center" align="middle_">20-24 yrs</td>
