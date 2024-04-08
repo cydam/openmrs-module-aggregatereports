@@ -1278,6 +1278,44 @@ newContent3 = `
        } 
        createDatatable();
        
+
+
+
+       // Function to summarize patients based on age group and gender
+       function summarizePatients(patients) {
+            const summary = {
+                '10-14': { F: 0, M: 0 },
+                '15-19': { F: 0, M: 0 },
+                '20-24': { F: 0, M: 0 }
+            };
+
+            patients.forEach(patient => {
+                const ageGroup = getAgeGroup(patient.age);
+                if (patient.gender === 'F') {
+                summary[ageGroup].F++;
+                } else if (patient.gender === 'M') {
+                summary[ageGroup].M++;
+                }
+            });
+
+            return summary;
+            }
+
+            // Function to determine age group based on cage
+            function getAgeGroup(age) {
+            if (age >= 10 && age <= 14) {
+                return '10-14';
+            } else if (age >= 15 && age <= 19) {
+                return '15-19';
+            } else if (age >= 20 && age <= 24) {
+                return '20-24';
+            } else {
+                return 'Unknown';
+            }
+            }
+
+
+            
        
    function getOTZData(month)
    {
@@ -1799,36 +1837,76 @@ newContent3 = `
                 jq("#totalEnrolledB1000MZ1000Total_"+currMonth).html(total)
 
                 
-                
-                return  myAjax({startDate:startDate, endDate:endDate, ageType:ageTyp}, '${ ui.actionLink("getTotalEnrolledWithScheduledPickupAfter") }');
+                //retired                
+                //return  myAjax({startDate:startDate, endDate:endDate, ageType:ageTyp}, '${ ui.actionLink("getTotalEnrolledWithScheduledPickupAfter") }');
+                return myAjax({startDate:startDate, endDate:endDate}, "otz/getPatientsVLAccess.action");
             })
 
 
             .then(function(response){
                 
-                var data = JSON.parse(response);
-                var male1014 = data["male10To14"];
-                var male1519 = data["male15To19"];
-                var male2024 = data["male20To24"];var maleabove24 = data["maleabove24"];
-                var female1014 = data["female10To14"];
-                var female1519 = data["female15To19"];
-                var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
+            var data = JSON.parse(response);
+
+            var today = new Date();
+            var bDate = new Date(startDate);
+            var monthDifference = monthDiff(bDate, today);//get months between 
+            
+            
+            console.log("what does the trend data looki likeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+            console.log("data",data);
+            
+            
+            for(var i=6; i<monthDifference; i += 6){
+                    
+                var mthTitle = (i == 0 ) ? "Baseline": "month"+i;
+                console.log("mthTitle: ", mthTitle)
+
+                var allPatientsKept = data["allPatientsKept"+i];
+                console.log("allPatientsKept: ", allPatientsKept.length)
+                console.log(allPatientsKept)
+
+                // Call the function and log the summary
+                const patientSummary = summarizePatients(allPatientsKept);
+                console.log('Summary based on age group and gender:', patientSummary);
                 
-                jq("#scheduledPickupFUM10To14_"+currMonth).html(male1014)
-                jq("#scheduledPickupFUM15To19_"+currMonth).html(male1519)
-                jq("#scheduledPickupFUM20To24_"+currMonth).html(male2024)
-                jq("#scheduledPickupFUMabove24_"+currMonth).html(maleabove24)
+                //scheduledPickupFUM10To14_1month6
                 
-                jq("#scheduledPickupFUF10To14_"+currMonth).html(female1014)
-                jq("#scheduledPickupFUF15To19_"+currMonth).html(female1519);
-                jq("#scheduledPickupFUF20To24_"+currMonth).html(female2024)
-                jq("#scheduledPickupFUFabove24_"+currMonth).html(femaleabove24)
+                jq("#scheduledPickupFUM10To14_"+currMonth+mthTitle).html(patientSummary["10-14"]["M"]);
+                jq("#scheduledPickupFUM15To19_"+currMonth+mthTitle).html(patientSummary["15-19"]["M"]);
+                jq("#scheduledPickupFUM20To24_"+currMonth+mthTitle).html(patientSummary["20-24"]["M"]);
                 
-                
-                var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#scheduledPickupFUTotal_"+currMonth).html(total)
-                
-                
+                jq("#scheduledPickupFUF10To14_"+currMonth+mthTitle).html(patientSummary["10-14"]["F"]);
+                jq("#scheduledPickupFUF15To19_"+currMonth+mthTitle).html(patientSummary["15-19"]["F"]);
+                jq("#scheduledPickupFUF20To24_"+currMonth+mthTitle).html(patientSummary["20-24"]["F"]);
+
+            }
+            
+            
+          
+           
+         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 
                 
                 return  myAjax({startDate:startDate, endDate:endDate, ageType:ageTyp}, '${ ui.actionLink("getTotalEnrolledWhoKeptScheduledPickupAfter") }');
