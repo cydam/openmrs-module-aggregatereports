@@ -2807,7 +2807,6 @@ newContent3 = `
     
     
     
-    
  function tableToCSV() {
     var endloop = 0;
  
