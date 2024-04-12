@@ -1291,10 +1291,12 @@ newContent3 = `
 
             patients.forEach(patient => {
                 const ageGroup = getAgeGroup(patient.age);
-                if (patient.gender === 'F') {
-                summary[ageGroup].F++;
-                } else if (patient.gender === 'M') {
-                summary[ageGroup].M++;
+                if (ageGroup !== 'Unknown') {
+                    if (patient.gender === 'F') {
+                        summary[ageGroup].F++;
+                    } else if (patient.gender === 'M') {
+                        summary[ageGroup].M++;
+                    }
                 }
             });
 
@@ -1313,6 +1315,8 @@ newContent3 = `
                 return 'Unknown';
             }
             }
+
+
 
 
             
@@ -1861,29 +1865,98 @@ newContent3 = `
                 var mthTitle = (i == 0 ) ? "Baseline": "month"+i;
                 console.log("mthTitle: ", mthTitle)
 
+                var allPatientsScheduled = data["allPatientsScheduled"+i];
                 var allPatientsKept = data["allPatientsKept"+i];
+                var allPatientsGoodScore = data["allPatientsGoodScore"+i];
+                var patientsEligible = data["patientsEligible"+i];
+                var patientsWithSample= data["patientsWithSample"+i];
+                var patientsWithResult = data["patientsWithResult"+i];
                 console.log("allPatientsKept: ", allPatientsKept.length)
                 console.log(allPatientsKept)
 
                 // Call the function and log the summary
-                const patientSummary = summarizePatients(allPatientsKept);
-                console.log('Summary based on age group and gender:', patientSummary);
+                const allPatientsScheduledSum = summarizePatients(allPatientsScheduled);
+                const allPatientsKeptSum = summarizePatients(allPatientsKept);
                 
+                //this doesnt seem right, copied from previous work
+                    const allPatientsGoodScoreSum = summarizePatients(allPatientsKept);
+                //const allPatientsGoodScoreSum = summarizePatients(allPatientsGoodScore);
+
+
+                const patientsEligibleSum = summarizePatients(patientsEligible);
+                const patientsWithSampleSum = summarizePatients(patientsWithSample);
+                const patientsWithResultSum = summarizePatients(patientsWithResult);
+                
+                
+
+
                 //scheduledPickupFUM10To14_1month6
                 
-                jq("#scheduledPickupFUM10To14_"+currMonth+mthTitle).html(patientSummary["10-14"]["M"]);
-                jq("#scheduledPickupFUM15To19_"+currMonth+mthTitle).html(patientSummary["15-19"]["M"]);
-                jq("#scheduledPickupFUM20To24_"+currMonth+mthTitle).html(patientSummary["20-24"]["M"]);
+                jq("#scheduledPickupFUM10To14_"+currMonth+mthTitle).html(allPatientsScheduledSum["10-14"]["M"]);
+                jq("#scheduledPickupFUM15To19_"+currMonth+mthTitle).html(allPatientsScheduledSum["15-19"]["M"]);
+                jq("#scheduledPickupFUM20To24_"+currMonth+mthTitle).html(allPatientsScheduledSum["20-24"]["M"]);
                 
-                jq("#scheduledPickupFUF10To14_"+currMonth+mthTitle).html(patientSummary["10-14"]["F"]);
-                jq("#scheduledPickupFUF15To19_"+currMonth+mthTitle).html(patientSummary["15-19"]["F"]);
-                jq("#scheduledPickupFUF20To24_"+currMonth+mthTitle).html(patientSummary["20-24"]["F"]);
+                jq("#scheduledPickupFUF10To14_"+currMonth+mthTitle).html(allPatientsScheduledSum["10-14"]["F"]);
+                jq("#scheduledPickupFUF15To19_"+currMonth+mthTitle).html(allPatientsScheduledSum["15-19"]["F"]);
+                jq("#scheduledPickupFUF20To24_"+currMonth+mthTitle).html(allPatientsScheduledSum["20-24"]["F"]);
+
+                //scheduledPickupFUM10To14_1month6
+                
+                jq("#scheduledKeptPickupFUM10To14_"+currMonth+mthTitle).html(allPatientsKeptSum["10-14"]["M"]);
+                jq("#scheduledKeptPickupFUM15To19_"+currMonth+mthTitle).html(allPatientsKeptSum["15-19"]["M"]);
+                jq("#scheduledKeptPickupFUM20To24_"+currMonth+mthTitle).html(allPatientsKeptSum["20-24"]["M"]);
+                
+                jq("#scheduledKeptPickupFUF10To14_"+currMonth+mthTitle).html(allPatientsKeptSum["10-14"]["F"]);
+                jq("#scheduledKeptPickupFUF15To19_"+currMonth+mthTitle).html(allPatientsKeptSum["15-19"]["F"]);
+                jq("#scheduledKeptPickupFUF20To24_"+currMonth+mthTitle).html(allPatientsKeptSum["20-24"]["F"]);
+
+                //goodAdhFUM10To14_1month6
+                
+                jq("#goodAdhFUM10To14_"+currMonth+mthTitle).html(allPatientsGoodScoreSum["10-14"]["M"]);
+                jq("#goodAdhFUM15To19_"+currMonth+mthTitle).html(allPatientsGoodScoreSum["15-19"]["M"]);
+                jq("#goodAdhFUM20To24_"+currMonth+mthTitle).html(allPatientsGoodScoreSum["20-24"]["M"]);
+                
+                jq("#goodAdhFUF10To14_"+currMonth+mthTitle).html(allPatientsGoodScoreSum["10-14"]["F"]);
+                jq("#goodAdhFUF15To19_"+currMonth+mthTitle).html(allPatientsGoodScoreSum["15-19"]["F"]);
+                jq("#goodAdhFUF20To24_"+currMonth+mthTitle).html(allPatientsGoodScoreSum["20-24"]["F"]);
+                
+                //eligibleFUM10To14_1month6
+                
+                jq("#eligibleFUM10To14_"+currMonth+mthTitle).html(patientsEligibleSum["10-14"]["M"]);
+                jq("#eligibleFUM15To19_"+currMonth+mthTitle).html(patientsEligibleSum["15-19"]["M"]);
+                jq("#eligibleFUM20To24_"+currMonth+mthTitle).html(patientsEligibleSum["20-24"]["M"]);
+                
+                jq("#eligibleFUF10To14_"+currMonth+mthTitle).html(patientsEligibleSum["10-14"]["F"]);
+                jq("#eligibleFUF15To19_"+currMonth+mthTitle).html(patientsEligibleSum["15-19"]["F"]);
+                jq("#eligibleFUF20To24_"+currMonth+mthTitle).html(patientsEligibleSum["20-24"]["F"]);
+
+                //samplesTakenM10To14_1month6
+                
+                jq("#samplesTakenM10To14_"+currMonth+mthTitle).html(patientsWithSampleSum["10-14"]["M"]);
+                jq("#samplesTakenM15To19_"+currMonth+mthTitle).html(patientsWithSampleSum["15-19"]["M"]);
+                jq("#samplesTakenM20To24_"+currMonth+mthTitle).html(patientsWithSampleSum["20-24"]["M"]);
+                
+                jq("#samplesTakenF10To14_"+currMonth+mthTitle).html(patientsWithSampleSum["10-14"]["F"]);
+                jq("#samplesTakenF15To19_"+currMonth+mthTitle).html(patientsWithSampleSum["15-19"]["F"]);
+                jq("#samplesTakenF20To24_"+currMonth+mthTitle).html(patientsWithSampleSum["20-24"]["F"]);
+
+                //samplesTakenResultM10To14_1month6
+                
+                jq("#samplesTakenResultM10To14_"+currMonth+mthTitle).html(patientsWithResultSum["10-14"]["M"]);
+                jq("#samplesTakenResultM15To19_"+currMonth+mthTitle).html(patientsWithResultSum["15-19"]["M"]);
+                jq("#samplesTakenResultM20To24_"+currMonth+mthTitle).html(patientsWithResultSum["20-24"]["M"]);
+                
+                jq("#samplesTakenResultF10To14_"+currMonth+mthTitle).html(patientsWithResultSum["10-14"]["F"]);
+                jq("#samplesTakenResultF15To19_"+currMonth+mthTitle).html(patientsWithResultSum["15-19"]["F"]);
+                jq("#samplesTakenResultF20To24_"+currMonth+mthTitle).html(patientsWithResultSum["20-24"]["F"]);
+
+         
+
 
             }
             
             
           
-           
          
 
 
@@ -1914,26 +1987,26 @@ newContent3 = `
 
             .then(function(response){
                 
-                var data = JSON.parse(response);
-                var male1014 = data["male10To14"];
-                var male1519 = data["male15To19"];
-                var male2024 = data["male20To24"];var maleabove24 = data["maleabove24"];
-                var female1014 = data["female10To14"];
-                var female1519 = data["female15To19"];
-                var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
-                
-                jq("#scheduledKeptPickupFUM10To14_"+currMonth).html(male1014)
-                jq("#scheduledKeptPickupFUM15To19_"+currMonth).html(male1519)
-                jq("#scheduledKeptPickupFUM20To24_"+currMonth).html(male2024)
-                jq("#scheduledKeptPickupFUMabove24_"+currMonth).html(maleabove24)
-                
-                jq("#scheduledKeptPickupFUF10To14_"+currMonth).html(female1014)
-                jq("#scheduledKeptPickupFUF15To19_"+currMonth).html(female1519);
-                jq("#scheduledKeptPickupFUF20To24_"+currMonth).html(female2024);
-                jq("#scheduledKeptPickupFUFabove24_"+currMonth).html(femaleabove24);
-                
-                var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
-                jq("#scheduledKeptPickupFUTotal_"+currMonth).html(total)
+                //var data = JSON.parse(response);
+                //var male1014 = data["male10To14"];
+                //var male1519 = data["male15To19"];
+                //var male2024 = data["male20To24"];var maleabove24 = data["maleabove24"];
+                //var female1014 = data["female10To14"];
+                //var female1519 = data["female15To19"];
+                //var female2024 = data["female20To24"]; var femaleabove24 = data["femaleabove24"];
+//                
+                //jq("#scheduledKeptPickupFUM10To14_"+currMonth).html(male1014)
+                //jq("#scheduledKeptPickupFUM15To19_"+currMonth).html(male1519)
+                //jq("#scheduledKeptPickupFUM20To24_"+currMonth).html(male2024)
+                //jq("#scheduledKeptPickupFUMabove24_"+currMonth).html(maleabove24)
+//                
+                //jq("#scheduledKeptPickupFUF10To14_"+currMonth).html(female1014)
+                //jq("#scheduledKeptPickupFUF15To19_"+currMonth).html(female1519);
+                //jq("#scheduledKeptPickupFUF20To24_"+currMonth).html(female2024);
+                //jq("#scheduledKeptPickupFUFabove24_"+currMonth).html(femaleabove24);
+//                
+                //var total = new Number(male1014) + new Number(male1519) + new Number(male2024) + new Number(maleabove24) + new Number(female1014) + new Number(female1519)  + new Number(female2024) + new Number(femaleabove24) ;
+                //jq("#scheduledKeptPickupFUTotal_"+currMonth).html(total)
                 
                 
                 return  myAjax({startDate:startDate, endDate:endDate, ageType:ageTyp}, '${ ui.actionLink("getTotalEnrolledWithGoodAdhScoreAfter") }');
