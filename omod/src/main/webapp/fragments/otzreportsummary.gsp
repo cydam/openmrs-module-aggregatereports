@@ -1843,8 +1843,7 @@ newContent3 = `
                 
                 //retired                
                 //return  myAjax({startDate:startDate, endDate:endDate, ageType:ageTyp}, '${ ui.actionLink("getTotalEnrolledWithScheduledPickupAfter") }');
-                //return myAjax({startDate:startDate, endDate:endDate}, "otz/getPatientsVLAccess.action");
-                return myAjax({startDate:startDate, endDate:endDate}, '${ ui.actionLink("getPatientsVLAccess") }');
+                return myAjax({startDate:startDate, endDate:endDate}, "otz/getPatientsVLAccess.action");
             })
 
 
