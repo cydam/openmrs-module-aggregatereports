@@ -298,8 +298,9 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
       console.log(${formattedMonthLength})
       var initialDate = "";
       var indicatorDescription = {};
-      jq(document).ready(function(e){
+
       
+      jq(document).ready(function(e){      
       jq.get("/<%= ui.contextPath();%>/ms/uiframework/resource/dataquality/otz_info.json", function(data){
             indicatorDescription = data;
         })
@@ -644,13 +645,37 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
 
 
 
+            function getMonthAndYear(currentMonth, currentYear) {
+
+            const monthNames = [
+                "January", "February", "March", "April", "May", "June", "July",
+                "August", "September", "October", "November", "December"
+            ];
+
+            const monthName = monthNames[currentMonth];
+            const result = `\${monthName} \${currentYear}`;
+
+            return result;
+        }
+
+
+
             function calculateDates(startDateTime, jsgroovar) {
     const today = new Date();
   
     const monthsBetweenDates = Math.floor((today - startDateTime) / (1000 * 60 * 60 * 24 * 30));
     console.log("monthsBetweenDates", monthsBetweenDates);
-  
+        
+    let currentMonth = startDateTime.getMonth();
+    let currentYear = startDateTime.getFullYear();
     for (let jf = 12;; jf += 6) {
+        currentMonth+=6;
+        
+            const quotient = Math.floor(currentMonth / 12);
+            const remainder = currentMonth % 12;
+            
+        
+        const getMaY = getMonthAndYear(remainder, currentYear+quotient);
         console.log("month:", jf);
         let newContent2 =``;
     
@@ -671,7 +696,7 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
             <td class="loadingView num4"  id="facilityState\${ageBand}\${jsgroovar}"></td>
             <td class="loadingView num4"  id="facilityLGA\${ageBand}\${jsgroovar}"></td>
             <td class="loadingView num4"  id="facilityName\${ageBand}\${jsgroovar}"></td>
-            <td class="loadingView num4"  id="monthYearr\${ageBand}\${jsgroovar}"></td>
+            <td class="loadingView num4"  id="monthYearr\${ageBand}\${jsgroovar}">\${getMaY}</td>
             <td  style="text-align:center" align="middle">\${var2}</td>
             <td  style="text-align:center" align="middle">\${var3} yrs</td>
             <td class="loadingView num4"  id="AYPLHIVCurrent\${ageBand}\${jsgroovar}" style="background-color: gray;">-</td>
@@ -737,6 +762,7 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
       }
   }
   
+
 
 
 
@@ -2784,7 +2810,7 @@ newContent3 = `
             var monthYearStringg = monthsName[newDateFromStart.getMonth()] + " " + newDateFromStart.getFullYear();
             
            
-            jq(`[id^="monthYearr"]`).html(monthYearStringg)
+            //jq(`[id^="monthYearr"]`).html(monthYearStringg)
 
             jq("#monthYearrM10To14_"+currMonth).html(monthYearStringg)
             jq("#monthYearrM15To19_"+currMonth).html(monthYearStringg)
