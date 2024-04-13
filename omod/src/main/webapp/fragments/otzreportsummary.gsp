@@ -660,7 +660,7 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
 
 
 
-            function calculateDates(startDateTime, jsgroovar) {
+function calculateDates(startDateTime, jsgroovar) {
     const today = new Date();
   
     const monthsBetweenDates = Math.floor((today - startDateTime) / (1000 * 60 * 60 * 24 * 30));
