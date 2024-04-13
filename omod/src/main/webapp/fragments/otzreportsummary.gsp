@@ -1860,7 +1860,7 @@ newContent3 = `
             console.log("data",data);
             
             
-            for(var i=6; i<monthDifference; i += 6){
+            for(var i=6;; i += 6){
                     
                 var mthTitle = (i == 0 ) ? "Baseline": "month"+i;
                 console.log("mthTitle: ", mthTitle)
@@ -1952,6 +1952,10 @@ newContent3 = `
 
          
 
+                
+                if (i>monthDifference) {
+                break;
+                }
 
             }
             
