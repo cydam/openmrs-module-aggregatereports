@@ -674,7 +674,6 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
             const quotient = Math.floor(currentMonth / 12);
             const remainder = currentMonth % 12;
             
-        
         const getMaY = getMonthAndYear(remainder, currentYear+quotient);
         console.log("month:", jf);
         let newContent2 =``;
