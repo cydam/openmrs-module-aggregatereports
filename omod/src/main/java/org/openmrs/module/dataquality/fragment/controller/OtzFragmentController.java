@@ -6360,7 +6360,7 @@ public class OtzFragmentController {
                 
                 int monthsBetweenDates = Months.monthsBetween(startDateTime, today).getMonths();
                 //for(int j=0; j<monthsBetweenDates; j +=6)
-                for(int j=0;; j +=6)
+                for(int j=0; j <= monthsBetweenDates; j +=6)
                 {
                     DateTime futureStartDateTime = startDateTime.plusMonths(j);
                     DateTime futureStartDateTime2 = startDateTime.plusMonths(j+6);
@@ -6630,9 +6630,11 @@ public class OtzFragmentController {
                     
                     
                     // To include the current month block
-                    if (j > monthsBetweenDates) {
+                    /*
+					if (j > monthsBetweenDates) {
                     break;
-                    } 
+                    }
+					*/
                    
                 }
                 

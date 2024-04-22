@@ -668,7 +668,7 @@ function calculateDates(startDateTime, jsgroovar) {
         
     let currentMonth = startDateTime.getMonth();
     let currentYear = startDateTime.getFullYear();
-    for (let jf = 12;; jf += 6) {
+    for (let jf = 12; jf <= monthsBetweenDates; jf += 6) {
         currentMonth+=6;
         
             const quotient = Math.floor(currentMonth / 12);
@@ -755,9 +755,11 @@ function calculateDates(startDateTime, jsgroovar) {
         newContent += newContent2;
 
         // To include the current month block
+        /*
         if (jf > monthsBetweenDates) {
           break;
         }
+        */
       }
   }
   
@@ -1968,7 +1970,7 @@ newContent3 = `
             console.log("data",data);
             
             
-            for(var i=6;; i += 6){
+            for(var i=6; i<=monthDifference; i += 6){
                     
                 var mthTitle = (i == 0 ) ? "Baseline": "month"+i;
                 console.log("mthTitle: ", mthTitle)
@@ -2149,10 +2151,11 @@ newContent3 = `
                 
                 
 
-                
+                /*
                 if (i>monthDifference) {
                 break;
                 }
+                */
 
             }
             
