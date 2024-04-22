@@ -1328,6 +1328,89 @@ newContent3 = `
             return summary;
             }
 
+
+            // Function to summarize patients based on age group and gender
+       function summarizePatients200(patients) {
+            const summary = {
+                '10-14': { F: 0, M: 0 },
+                '15-19': { F: 0, M: 0 },
+                '20-24': { F: 0, M: 0 }
+            };
+
+            patients.forEach(patient => {
+                const ageGroup = getAgeGroup(patient.age);
+
+                if (patient.viralLoad < 200) {
+                    if (ageGroup !== 'Unknown') {
+                        if (patient.gender === 'F') {
+                            summary[ageGroup].F++;
+                        } else if (patient.gender === 'M') {
+                            summary[ageGroup].M++;
+                        }
+                    }
+                }
+
+
+            });
+
+            return summary;
+            }
+
+            // Function to summarize patients based on age group and gender
+       function summarizePatients200to999(patients) {
+            const summary = {
+                '10-14': { F: 0, M: 0 },
+                '15-19': { F: 0, M: 0 },
+                '20-24': { F: 0, M: 0 }
+            };
+
+            patients.forEach(patient => {
+                const ageGroup = getAgeGroup(patient.age);
+
+                if (patient.viralLoad >= 200 && patient.viralLoad < 1000) {
+                    if (ageGroup !== 'Unknown') {
+                        if (patient.gender === 'F') {
+                            summary[ageGroup].F++;
+                        } else if (patient.gender === 'M') {
+                            summary[ageGroup].M++;
+                        }
+                    }
+                }
+
+
+            });
+
+            return summary;
+            }
+
+            // Function to summarize patients based on age group and gender
+       function summarizePatients1000(patients) {
+            const summary = {
+                '10-14': { F: 0, M: 0 },
+                '15-19': { F: 0, M: 0 },
+                '20-24': { F: 0, M: 0 }
+            };
+
+            patients.forEach(patient => {
+                const ageGroup = getAgeGroup(patient.age);
+
+                if (patient.viralLoad >= 1000) {
+                    if (ageGroup !== 'Unknown') {
+                        if (patient.gender === 'F') {
+                            summary[ageGroup].F++;
+                        } else if (patient.gender === 'M') {
+                            summary[ageGroup].M++;
+                        }
+                    }
+                }
+
+
+            });
+
+            return summary;
+            }
+            
+
             // Function to determine age group based on cage
             function getAgeGroup(age) {
             if (age >= 10 && age <= 14) {
@@ -1896,6 +1979,7 @@ newContent3 = `
                 var patientsEligible = data["patientsEligible"+i];
                 var patientsWithSample= data["patientsWithSample"+i];
                 var patientsWithResult = data["patientsWithResult"+i];
+                var patientsWithResultPast12Months = data["patientsWithResultPast12Months"+i];
                 console.log("allPatientsKept: ", allPatientsKept.length)
                 console.log(allPatientsKept)
 
@@ -1910,7 +1994,19 @@ newContent3 = `
 
                 const patientsEligibleSum = summarizePatients(patientsEligible);
                 const patientsWithSampleSum = summarizePatients(patientsWithSample);
+
                 const patientsWithResultSum = summarizePatients(patientsWithResult);
+                const patientsWithResultLT200Sum = summarizePatients200(patientsWithResult);
+                const patientsWithResult200to999Sum = summarizePatients200to999(patientsWithResult);
+                const patientsWithResultGT1000Sum = summarizePatients1000(patientsWithResult);
+
+                const patientsWithResultPast12MonthsSum = summarizePatients(patientsWithResultPast12Months);
+                const patientsWithResultPast12MonthsLT200Sum = summarizePatients200(patientsWithResultPast12Months);
+                const patientsWithResultPast12Months200to999Sum = summarizePatients200to999(patientsWithResultPast12Months);
+                const patientsWithResultPast12MonthsGT1000Sum = summarizePatients1000(patientsWithResultPast12Months);
+                
+                
+                
                 
                 
 
@@ -1975,7 +2071,83 @@ newContent3 = `
                 jq("#samplesTakenResultF15To19_"+currMonth+mthTitle).html(patientsWithResultSum["15-19"]["F"]);
                 jq("#samplesTakenResultF20To24_"+currMonth+mthTitle).html(patientsWithResultSum["20-24"]["F"]);
 
+                //samplesTakenResult200M10To14_1month6
+                
+                jq("#samplesTakenResult200M10To14_"+currMonth+mthTitle).html(patientsWithResultLT200Sum["10-14"]["M"]);
+                jq("#samplesTakenResult200M15To19_"+currMonth+mthTitle).html(patientsWithResultLT200Sum["15-19"]["M"]);
+                jq("#samplesTakenResult200M20To24_"+currMonth+mthTitle).html(patientsWithResultLT200Sum["20-24"]["M"]);
+                
+                jq("#samplesTakenResult200F10To14_"+currMonth+mthTitle).html(patientsWithResultLT200Sum["10-14"]["F"]);
+                jq("#samplesTakenResult200F15To19_"+currMonth+mthTitle).html(patientsWithResultLT200Sum["15-19"]["F"]);
+                jq("#samplesTakenResult200F20To24_"+currMonth+mthTitle).html(patientsWithResultLT200Sum["20-24"]["F"]);
+
+                //samplesTakenResult200To1000M10To14_1month6
+                
+                jq("#samplesTakenResult200To1000M10To14_"+currMonth+mthTitle).html(patientsWithResult200to999Sum["10-14"]["M"]);
+                jq("#samplesTakenResult200To1000M15To19_"+currMonth+mthTitle).html(patientsWithResult200to999Sum["15-19"]["M"]);
+                jq("#samplesTakenResult200To1000M20To24_"+currMonth+mthTitle).html(patientsWithResult200to999Sum["20-24"]["M"]);
+                
+                jq("#samplesTakenResult200To1000F10To14_"+currMonth+mthTitle).html(patientsWithResult200to999Sum["10-14"]["F"]);
+                jq("#samplesTakenResult200To1000F15To19_"+currMonth+mthTitle).html(patientsWithResult200to999Sum["15-19"]["F"]);
+                jq("#samplesTakenResult200To1000F20To24_"+currMonth+mthTitle).html(patientsWithResult200to999Sum["20-24"]["F"]);
+
+                //samplesTakenResult1000M10To14_1month6
+                
+                jq("#samplesTakenResult1000M10To14_"+currMonth+mthTitle).html(patientsWithResultGT1000Sum["10-14"]["M"]);
+                jq("#samplesTakenResult1000M15To19_"+currMonth+mthTitle).html(patientsWithResultGT1000Sum["15-19"]["M"]);
+                jq("#samplesTakenResult1000M20To24_"+currMonth+mthTitle).html(patientsWithResultGT1000Sum["20-24"]["M"]);
+                
+                jq("#samplesTakenResult1000F10To14_"+currMonth+mthTitle).html(patientsWithResultGT1000Sum["10-14"]["F"]);
+                jq("#samplesTakenResult1000F15To19_"+currMonth+mthTitle).html(patientsWithResultGT1000Sum["15-19"]["F"]);
+                jq("#samplesTakenResult1000F20To24_"+currMonth+mthTitle).html(patientsWithResultGT1000Sum["20-24"]["F"]);
+
+                //resultPast12MtM10To14_1month6
+                
+                jq("#resultPast12MtM10To14_"+currMonth+mthTitle).html(patientsWithResultPast12MonthsSum["10-14"]["M"]);
+                jq("#resultPast12MtM15To19_"+currMonth+mthTitle).html(patientsWithResultPast12MonthsSum["15-19"]["M"]);
+                jq("#resultPast12MtM20To24_"+currMonth+mthTitle).html(patientsWithResultPast12MonthsSum["20-24"]["M"]);
+                
+                jq("#resultPast12MtF10To14_"+currMonth+mthTitle).html(patientsWithResultPast12MonthsSum["10-14"]["F"]);
+                jq("#resultPast12MtF15To19_"+currMonth+mthTitle).html(patientsWithResultPast12MonthsSum["15-19"]["F"]);
+                jq("#resultPast12MtF20To24_"+currMonth+mthTitle).html(patientsWithResultPast12MonthsSum["20-24"]["F"]);
+
+                //resultPast12Mt200M10To14_1month6
+                
+                jq("#resultPast12Mt200M10To14_"+currMonth+mthTitle).html(patientsWithResultPast12MonthsLT200Sum["10-14"]["M"]);
+                jq("#resultPast12Mt200M15To19_"+currMonth+mthTitle).html(patientsWithResultPast12MonthsLT200Sum["15-19"]["M"]);
+                jq("#resultPast12Mt200M20To24_"+currMonth+mthTitle).html(patientsWithResultPast12MonthsLT200Sum["20-24"]["M"]);
+                
+                jq("#resultPast12Mt200F10To14_"+currMonth+mthTitle).html(patientsWithResultPast12MonthsLT200Sum["10-14"]["F"]);
+                jq("#resultPast12Mt200F15To19_"+currMonth+mthTitle).html(patientsWithResultPast12MonthsLT200Sum["15-19"]["F"]);
+                jq("#resultPast12Mt200F20To24_"+currMonth+mthTitle).html(patientsWithResultPast12MonthsLT200Sum["20-24"]["F"]);
+
+                //resultPast12Mt200To100M10To14_1month6
+                
+                jq("#resultPast12Mt200To100M10To14_"+currMonth+mthTitle).html(patientsWithResultPast12Months200to999Sum["10-14"]["M"]);
+                jq("#resultPast12Mt200To100M15To19_"+currMonth+mthTitle).html(patientsWithResultPast12Months200to999Sum["15-19"]["M"]);
+                jq("#resultPast12Mt200To100M20To24_"+currMonth+mthTitle).html(patientsWithResultPast12Months200to999Sum["20-24"]["M"]);
+                
+                jq("#resultPast12Mt200To100F10To14_"+currMonth+mthTitle).html(patientsWithResultPast12Months200to999Sum["10-14"]["F"]);
+                jq("#resultPast12Mt200To100F15To19_"+currMonth+mthTitle).html(patientsWithResultPast12Months200to999Sum["15-19"]["F"]);
+                jq("#resultPast12Mt200To100F20To24_"+currMonth+mthTitle).html(patientsWithResultPast12Months200to999Sum["20-24"]["F"]);
+
+                //resultPast12Mt1000M10To14_1month6
+                
+                jq("#resultPast12Mt1000M10To14_"+currMonth+mthTitle).html(patientsWithResultPast12MonthsGT1000Sum["10-14"]["M"]);
+                jq("#resultPast12Mt1000M15To19_"+currMonth+mthTitle).html(patientsWithResultPast12MonthsGT1000Sum["15-19"]["M"]);
+                jq("#resultPast12Mt1000M20To24_"+currMonth+mthTitle).html(patientsWithResultPast12MonthsGT1000Sum["20-24"]["M"]);
+                
+                jq("#resultPast12Mt1000F10To14_"+currMonth+mthTitle).html(patientsWithResultPast12MonthsGT1000Sum["10-14"]["F"]);
+                jq("#resultPast12Mt1000F15To19_"+currMonth+mthTitle).html(patientsWithResultPast12MonthsGT1000Sum["15-19"]["F"]);
+                jq("#resultPast12Mt1000F20To24_"+currMonth+mthTitle).html(patientsWithResultPast12MonthsGT1000Sum["20-24"]["F"]);
+
+                
+
          
+                
+
+                
+                
 
                 
                 if (i>monthDifference) {
