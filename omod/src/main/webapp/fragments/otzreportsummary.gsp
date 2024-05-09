@@ -211,7 +211,7 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
     <br/>
     
     <div style="display: block">
-        <div id="OTZReport" style="display: none">OTZ Report</div>
+        <div id="OTZReport" style="display: block">OTZ Report</div>
     </div>
       
     
@@ -668,6 +668,11 @@ function calculateDates(startDateTime, jsgroovar) {
         
     let currentMonth = startDateTime.getMonth();
     let currentYear = startDateTime.getFullYear();
+    
+    let currentMonthRevert = startDateTime.getMonth();
+    let currentYearRevert = startDateTime.getFullYear();
+    const getMaYRevert = getMonthAndYear(currentMonthRevert, currentYearRevert);
+    
     for (let jf = 12; jf <= monthsBetweenDates; jf += 6) {
         currentMonth+=6;
         
@@ -695,7 +700,7 @@ function calculateDates(startDateTime, jsgroovar) {
             <td class="loadingView num4"  id="facilityState\${ageBand}\${jsgroovar}"></td>
             <td class="loadingView num4"  id="facilityLGA\${ageBand}\${jsgroovar}"></td>
             <td class="loadingView num4"  id="facilityName\${ageBand}\${jsgroovar}"></td>
-            <td class="loadingView num4"  id="monthYearr\${ageBand}\${jsgroovar}">\${getMaY}</td>
+            <td class="loadingView num4"  id="monthYearr\${ageBand}\${jsgroovar}">\${getMaYRevert}</td>
             <td  style="text-align:center" align="middle">\${var2}</td>
             <td  style="text-align:center" align="middle">\${var3} yrs</td>
             <td class="loadingView num4"  id="AYPLHIVCurrent\${ageBand}\${jsgroovar}" style="background-color: gray;"></td>
