@@ -588,6 +588,7 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
                 <th  style="text-align:center" align="middle">State</th>
                 <th  style="text-align:center" align="middle">LGA</th>
                 <th  style="text-align:center" align="middle">Facility name</th>
+                <th  style="text-align:center" align="middle">DATIM Code</th>
                 <th  style="text-align:center" align="middle">Cohort Month (MM/YYYY)</th>
                 <th  style="text-align:center" align="middle">Sex</th>
                 <th  style="text-align:center" align="middle">Age Band</th>
@@ -700,6 +701,7 @@ function calculateDates(startDateTime, jsgroovar) {
             <td class="loadingView num4"  id="facilityState\${ageBand}\${jsgroovar}"></td>
             <td class="loadingView num4"  id="facilityLGA\${ageBand}\${jsgroovar}"></td>
             <td class="loadingView num4"  id="facilityName\${ageBand}\${jsgroovar}"></td>
+            <td class="loadingView num4"  id="facilityDATIMCode"></td>
             <td class="loadingView num4"  id="monthYearr\${ageBand}\${jsgroovar}">\${getMaYRevert}</td>
             <td  style="text-align:center" align="middle">\${var2}</td>
             <td  style="text-align:center" align="middle">\${var3} yrs</td>
@@ -779,6 +781,7 @@ for (let jsgroovar = 1; jsgroovar <= formattedMonthLength; jsgroovar++) {
                 <td class="loadingView num4"  id="facilityStateM10To14_\${jsgroovar}"></td>
                 <td class="loadingView num4"  id="facilityLGAM10To14_\${jsgroovar}"></td>
                 <td class="loadingView num4"  id="facilityNameM10To14_\${jsgroovar}"></td>
+                <td class="loadingView num4"  id="facilityDATIMCode"></td>
                 <td class="loadingView num4"  id="monthYearrM10To14_\${jsgroovar}"></td>
                 <td  style="text-align:center" align="middle">Male</td>
                 <td  style="text-align:center" align="middle">10-14 yrs</td>
@@ -835,6 +838,7 @@ for (let jsgroovar = 1; jsgroovar <= formattedMonthLength; jsgroovar++) {
                 <td class="loadingView num4"  id="facilityStateM15To19_\${jsgroovar}"></td>
                 <td class="loadingView num4"  id="facilityLGAM15To19_\${jsgroovar}"></td>
                 <td class="loadingView num4"  id="facilityNameM15To19_\${jsgroovar}"></td>
+                <td class="loadingView num4"  id="facilityDATIMCode"></td>
                 <td class="loadingView num4"  id="monthYearrM15To19_\${jsgroovar}"></td>
                 <td  style="text-align:center" align="middle">Male</td>
                 <td  style="text-align:center" align="middle">15-19 yrs</td>
@@ -891,6 +895,7 @@ for (let jsgroovar = 1; jsgroovar <= formattedMonthLength; jsgroovar++) {
                 <td class="loadingView num4"  id="facilityStateM20To24_\${jsgroovar}"></td>
                 <td class="loadingView num4"  id="facilityLGAM20To24_\${jsgroovar}"></td>
                 <td class="loadingView num4"  id="facilityNameM20To24_\${jsgroovar}"></td>
+                <td class="loadingView num4"  id="facilityDATIMCode"></td>
                 <td class="loadingView num4"  id="monthYearrM20To24_\${jsgroovar}"></td>
                 <td  style="text-align:center" align="middle">Male</td>
                 <td  style="text-align:center" align="middle">20-24 yrs</td>
@@ -948,6 +953,7 @@ for (let jsgroovar = 1; jsgroovar <= formattedMonthLength; jsgroovar++) {
                 <td class="loadingView num4"  id="facilityStateF10To14_\${jsgroovar}"></td>
                 <td class="loadingView num4"  id="facilityLGAF10To14_\${jsgroovar}"></td>
                 <td class="loadingView num4"  id="facilityNameF10To14_\${jsgroovar}"></td>
+                <td class="loadingView num4"  id="facilityDATIMCode"></td>
                 <td class="loadingView num4"  id="monthYearrF10To14_\${jsgroovar}"></td>
                 <td  style="text-align:center" align="middle">Female</td>
                 <td  style="text-align:center" align="middle">10-14 yrs</td>
@@ -1004,6 +1010,7 @@ for (let jsgroovar = 1; jsgroovar <= formattedMonthLength; jsgroovar++) {
                 <td class="loadingView num4"  id="facilityStateF15To19_\${jsgroovar}"></td>
                 <td class="loadingView num4"  id="facilityLGAF15To19_\${jsgroovar}"></td>
                 <td class="loadingView num4"  id="facilityNameF15To19_\${jsgroovar}"></td>
+                <td class="loadingView num4"  id="facilityDATIMCode"></td>
                 <td class="loadingView num4"  id="monthYearrF15To19_\${jsgroovar}"></td>
                 <td  style="text-align:center" align="middle">Female</td>
                 <td  style="text-align:center" align="middle">15-19 yrs</td>
@@ -1060,6 +1067,7 @@ for (let jsgroovar = 1; jsgroovar <= formattedMonthLength; jsgroovar++) {
                 <td class="loadingView num4"  id="facilityStateF20To24_\${jsgroovar}"></td>
                 <td class="loadingView num4"  id="facilityLGAF20To24_\${jsgroovar}"></td>
                 <td class="loadingView num4"  id="facilityNameF20To24_\${jsgroovar}"></td>
+                <td class="loadingView num4"  id="facilityDATIMCode"></td>
                 <td class="loadingView num4"  id="monthYearrF20To24_\${jsgroovar}"></td>
                 <td  style="text-align:center" align="middle">Female</td>
                 <td  style="text-align:center" align="middle">20-24 yrs</td>
@@ -1128,6 +1136,7 @@ newContent3 = `
                 <td class="loadingView num4"  id="facility_ended_StateF20To24"></td>
                 <td class="loadingView num4"  id="facility_ended_LGAF20To24"></td>
                 <td class="loadingView num4"  id="facility_ended_NameF20To24"></td>
+                <td class="loadingView num4"  id="facilityDATIMCode"></td>
                 <td class="loadingView num4"  id="monthYearrF20To24"></td>
                 <td  style="text-align:center" align="middle_">Female</td>
                 <td  style="text-align:center" align="middle_">20-24 yrs</td>
@@ -3158,6 +3167,8 @@ newContent3 = `
             
            
             //jq(`[id^="monthYearr"]`).html(monthYearStringg)
+
+            jq(`[id^="facilityDATIMCode"]`).html(data["DATIM_Code"])
 
             jq("#monthYearrM10To14_"+currMonth).html(monthYearStringg)
             jq("#monthYearrM15To19_"+currMonth).html(monthYearStringg)
