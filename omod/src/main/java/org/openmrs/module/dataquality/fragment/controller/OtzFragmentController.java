@@ -6359,7 +6359,8 @@ public class OtzFragmentController {
                 DateTime today = new DateTime();
                 
                 int monthsBetweenDates = Months.monthsBetween(startDateTime, today).getMonths();
-                for(int j=0; j<monthsBetweenDates; j +=6)
+                //for(int j=0; j<monthsBetweenDates; j +=6)
+                for(int j=0; j <= monthsBetweenDates; j +=6)
                 {
                     DateTime futureStartDateTime = startDateTime.plusMonths(j);
                     DateTime futureStartDateTime2 = startDateTime.plusMonths(j+6);
@@ -6382,6 +6383,21 @@ public class OtzFragmentController {
                        // month = j-6;
                     }
                     List<OTZPatient> allPatients = otzDao.getTotalPtsEnrolledAndEligibleForVL3(startDate, endDate,  month);
+                    //stopped here
+                    
+                    //quick
+                    List<OTZPatient> allPatientsExited = otzDao.getTotalEnrolledAndExitedAfter(startDate, endDate);
+                    List<OTZPatient> allPatientsTO = otzDao.getTotalEnrolledAndTransitionedAfter(startDate, endDate);
+                    List<OTZPatient> allPatientsOptedOut = otzDao.getTotalEnrolledAndOptedOutAfter(startDate, endDate);
+                    List<OTZPatient> allPatientsDied = otzDao.getTotalEnrolledAndDiedAfter(startDate, endDate);
+                    List<OTZPatient> allPatientsIIT = otzDao.getTotalEnrolledAndLTFUAfter(startDate, endDate);
+                    List<OTZPatient> allPatientsTransferred = otzDao.getTotalEnrolledAndTransferredOutAfter(startDate, endDate);
+                    List<OTZPatient> allPatientsWhoCompleted = otzDao.getTotalAYPLHIVEnrolledInOTZWhoComplete7(startDate, endDate);
+                    List<OTZPatient> allPatientsSwitchTo3rd = otzDao.getTotalEnrolledWithSwitchTo3rdLine(startDate, endDate, String.valueOf(month));
+                    List<OTZPatient> allPatientsSwitchTo2nd = otzDao.getTotalEnrolledWithSwitchTo2ndLine(startDate, endDate, String.valueOf(month));
+                    List<OTZPatient> allPatientsPast12MonthsResultAbove1000WithRepeatVl = otzDao.getTotalEnrolledWithVLPast12MonthsResultAbove1000WithRepeatVl(startDate, endDate, String.valueOf(month));
+                    List<OTZPatient> allPatientsPast12MonthsResultAbove1000WithRepeatVlBelow200 = otzDao.getTotalEnrolledWithVLPast12MonthsResultAbove1000WithRepeatVlBelow200(startDate, endDate, String.valueOf(month));
+                    List<OTZPatient> allPatientsPast12MonthsResultAbove1000WithRepeatVlAbove200Below1000 = otzDao.getTotalEnrolledWithVLPast12MonthsResultAbove1000WithRepeatVlAbove200Below1000(startDate, endDate, String.valueOf(month));
                      
                     
                     List<OTZPatient> patientsEligible = new ArrayList<>();
@@ -6569,6 +6585,21 @@ public class OtzFragmentController {
                     data.put("patientsUndetectablePast12Months"+j, patientsUndetectablePast12Months);
                     data.put("patientsLLVPast12Months"+j, patientsLLVPast12Months);
                     data.put("patientsWithResultPast12MonthsAbove1000"+j, patientsWithResultPast12MonthsAbove1000);
+                    
+                    //quick
+                    data.put("allPatientsPast12MonthsResultAbove1000WithRepeatVl"+j, allPatientsPast12MonthsResultAbove1000WithRepeatVl);
+                    data.put("allPatientsPast12MonthsResultAbove1000WithRepeatVlBelow200"+j, allPatientsPast12MonthsResultAbove1000WithRepeatVlBelow200);
+                    data.put("allPatientsPast12MonthsResultAbove1000WithRepeatVlAbove200Below1000"+j, allPatientsPast12MonthsResultAbove1000WithRepeatVlAbove200Below1000);
+                    data.put("allPatientsSwitchTo2nd"+j, allPatientsSwitchTo2nd);
+                    data.put("allPatientsSwitchTo3rd"+j, allPatientsSwitchTo3rd);
+                    data.put("allPatientsWhoCompleted"+j, allPatientsWhoCompleted);
+                    data.put("allPatientsTransferred"+j, allPatientsTransferred);
+                    data.put("allPatientsIIT"+j, allPatientsIIT);
+                    data.put("allPatientsDied"+j, allPatientsDied);
+                    data.put("allPatientsOptedOut"+j, allPatientsOptedOut);
+                    data.put("allPatientsTO"+j, allPatientsTO);
+                    data.put("allPatientsExited"+j, allPatientsExited);
+                    
                    
                     
                     
@@ -6628,6 +6659,12 @@ public class OtzFragmentController {
                     
                     
                     
+                    // To include the current month block
+                    /*
+					if (j > monthsBetweenDates) {
+                    break;
+                    }
+					*/
                    
                 }
                 
