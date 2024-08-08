@@ -4616,6 +4616,9 @@ public class OTZDao {
                         
                         StringBuilder queryString4 = new StringBuilder(
 			        "SELECT property_value FROM global_property WHERE property = 'partner_short_name'");
+                        
+                        StringBuilder queryString5 = new StringBuilder(
+			        "SELECT property_value FROM global_property WHERE property = 'facility_datim_code'");
 			int i = 1;
 			//DateTime now = new DateTime(new Date());
 			//String nowString = now.toString("yyyy'-'MM'-'dd' 'HH':'mm");
@@ -4667,6 +4670,19 @@ public class OTZDao {
                             
                             OTZKeyValue tempKVP = new OTZKeyValue();
                             tempKVP.setKeyString("Parner_Name");
+                            tempKVP.setValueString(rs.getString("property_value"));
+                            
+                            OTZKeyValues.add(tempKVP);
+                        }
+                        
+                        stmt = con.prepareStatement(queryString5.toString());
+			
+			rs = stmt.executeQuery();
+			while(rs.next())
+                        {
+                            
+                            OTZKeyValue tempKVP = new OTZKeyValue();
+                            tempKVP.setKeyString("DATIM_Code");
                             tempKVP.setValueString(rs.getString("property_value"));
                             
                             OTZKeyValues.add(tempKVP);
