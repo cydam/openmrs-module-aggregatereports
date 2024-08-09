@@ -31,11 +31,12 @@ public class OTZDao {
 			
 			//stmt = Database.conn.createStatement(java.sql.ResultSet.TYPE_FORWARD_ONLY, java.sql.ResultSet.CONCUR_READ_ONLY);
 			StringBuilder queryString = new StringBuilder(
-			        "SELECT patient_program.date_enrolled, dqr_meta.dob,  patient_identifier.identifier,  dqr_meta.patient_id, TIMESTAMPDIFF(YEAR, person.birthdate, patient_program.date_enrolled) AS age, TIMESTAMPDIFF(YEAR, person.birthdate, ?) AS cage,  person.gender, dqr_meta.art_start_date, person.birthdate, person_name.given_name, person_name.family_name FROM dqr_meta \n" +
+			        "SELECT patient_program.date_enrolled, dqr_meta.dob,  patient_identifier.identifier,  dqr_meta.patient_id, TIMESTAMPDIFF(YEAR, person.birthdate, patient_program.date_enrolled) AS age, TIMESTAMPDIFF(YEAR, person.birthdate, ?) AS cage,  person.gender, dqr_meta.art_start_date, person.birthdate, person_name.given_name, person_name.family_name, otzplus.value_datetime as otzplusedate FROM dqr_meta \n" +
                                 " JOIN patient_identifier ON patient_identifier.patient_id=dqr_meta.patient_id AND patient_identifier.identifier_type=4 "+
                                 " JOIN person ON person.person_id=dqr_meta.patient_id\n" +
                                 " JOIN person_name ON person_name.person_id=dqr_meta.patient_id\n" +
                                 " JOIN patient_program ON patient_program.patient_id=dqr_meta.patient_id AND patient_program.date_enrolled BETWEEN ? AND ? "+
+                                " LEFT JOIN (SELECT obs.person_id, obs.value_datetime FROM obs where obs.concept_id=166350 and obs.voided=0 limit 1) as otzplus on (otzplus.person_id=dqr_meta.patient_id) "+
                                 " where dqr_meta.patient_id IN (SELECT patient_id FROM patient_program where program_id=5 \n" +
                                 " AND patient_program.date_enrolled BETWEEN ? AND ? " + ") GROUP BY dqr_meta.patient_id ");
 			int i = 1;
@@ -61,6 +62,7 @@ public class OTZDao {
                             tempPatient.setGivenName(rs.getString("given_name"));
                             tempPatient.setFamilyName(rs.getString("family_name"));
                             tempPatient.setEnrollmentDate(rs.getString("date_enrolled"));
+                            tempPatient.setOtzplusedate(rs.getString("otzplusedate"));
                             allPatients.add(tempPatient);
                         }
 			return allPatients;
