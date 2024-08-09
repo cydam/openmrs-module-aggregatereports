@@ -30,6 +30,8 @@ public class OTZPatient extends Patient {
 	
 	private String outcomeDate;
 	
+	private String otzplusedate;
+	
 	public String getEnrollmentDate() {
 		return enrollmentDate;
 	}
@@ -100,6 +102,14 @@ public class OTZPatient extends Patient {
 	
 	public void setOutcomeDate(String outcomeDate) {
 		this.outcomeDate = outcomeDate;
+	}
+	
+	public String getOtzplusedate() {
+		return otzplusedate;
+	}
+	
+	public void setOtzplusedate(String otzplusedate) {
+		this.otzplusedate = otzplusedate;
 	}
 	
 }
