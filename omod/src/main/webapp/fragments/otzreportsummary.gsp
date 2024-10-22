@@ -473,9 +473,12 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
             
             /////////////////////////////////////////////////here we go/////////////////////////////////////////////////
             const beginDate = new Date(startDate);
+            console.log("begindate before 2020", beginDate);
+            if (beginDate.getFullYear() < 2020) {
+                beginDate.setFullYear(2020, 0, 1);
+            }
+            console.log("begindate before 2020 reset", beginDate);
             const finishDate = new Date(endDate);
-            console.log("beginDate: "+beginDate);
-            console.log("finishDate: "+finishDate);
 
 
 
@@ -509,7 +512,7 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
 
 
             const monthsData = getStartAndEndDates(beginDate, finishDate);
-            console.log(monthsData);
+            console.log("monthsData", monthsData);
 
 
             // Iterate over the array using a for loop
@@ -567,14 +570,11 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
             }
 
             const callgetFormattedMonthsData = getFormattedMonthsData(monthsData);
-            console.log("here is where i call formatted month array and length");
-            console.log(callgetFormattedMonthsData);
+            console.log("callgetFormattedMonthsData", callgetFormattedMonthsData);
             formattedMonthLength = callgetFormattedMonthsData.length;
-            console.log(formattedMonthLength);
+            console.log("formattedMonthLength", formattedMonthLength);
 
-            console.log("build the js groovy")
-
-            console.log("button click")
+           
             // Initialize the HTML content variable
             
             let newContent3 =``;
@@ -1453,8 +1453,8 @@ newContent3 = `
         let endDate = month.endDate;
         let currMonth = month.month;
         
-        console.log("currMonth")
-        console.log(currMonth)
+        
+        console.log("currMonth", currMonth)
              currReportCount = 0;
             //show the progress area
             jq("#progressArea").removeClass("hidden");
