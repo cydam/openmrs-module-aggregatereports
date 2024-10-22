@@ -2064,7 +2064,7 @@ newContent3 = `
                 jq("#scheduledPickupFUF15To19_"+currMonth+mthTitle).html(allPatientsScheduledSum["15-19"]["F"]);
                 jq("#scheduledPickupFUF20To24_"+currMonth+mthTitle).html(allPatientsScheduledSum["20-24"]["F"]);
 
-                //scheduledPickupFUM10To14_1month6
+                //scheduledKeptPickupFUM10To14_1month6
                 
                 jq("#scheduledKeptPickupFUM10To14_"+currMonth+mthTitle).html(allPatientsKeptSum["10-14"]["M"]);
                 jq("#scheduledKeptPickupFUM15To19_"+currMonth+mthTitle).html(allPatientsKeptSum["15-19"]["M"]);
